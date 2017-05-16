@@ -1,0 +1,12 @@
+{
+    "name": "jmondi/cqs",
+    "description": "An Event Based Boilerplate",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jason Raimondi",
+            "email": "jason@raimondi.us"
+        }
+    ],
+    "require": {}
+}
