@@ -2,8 +2,6 @@
 namespace Jmondi\Gut\Template\Twig;
 
 use Jmondi\Gut\Template\MarkdownParser;
-use Jmondi\Gut\Template\Twig\TemplateNamespace;
-use Jmondi\Gut\Template\Twig\TwigMarkdownExtension;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
