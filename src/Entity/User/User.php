@@ -1,11 +1,13 @@
 <?php
 namespace Jmondi\Gut\Entity\User;
 
-use Jmondi\Gut\Doctrine\EntityInterface;
+use Jmondi\Gut\Doctrine\UuidEntityInterface;
 use Jmondi\Gut\Entity\DateTime\DateTimeTrait;
 use Jmondi\Gut\Entity\Id\UuidEntityTrait;
+use Jmondi\Gut\Entity\Uuid\Uuid;
+use Jmondi\Gut\Entity\Uuid\UuidInterface;
 
-class User implements EntityInterface
+class User implements UuidEntityInterface
 {
     use UuidEntityTrait;
     use DateTimeTrait;
@@ -27,9 +29,9 @@ class User implements EntityInterface
         $this->email = $email;
     }
 
-    public function getId(): string
+    public function getId(): UuidInterface
     {
-        return $this->id;
+        return Uuid::fromString($this->id);
     }
 
     public function getEmail(): string

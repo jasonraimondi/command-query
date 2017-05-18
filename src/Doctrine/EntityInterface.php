@@ -3,5 +3,5 @@ namespace Jmondi\Gut\Doctrine;
 
 interface EntityInterface
 {
-    public function getId(): string;
+    public function getId();
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="Jmondi\Gut\Entity\OAuth\OAuthClient">
+        <id name="identifier" type="string"/>
+        <field name="name" type="string"/>
+        <field name="redirectUrls" type="array" nullable="true"/>
+        <field name="createdAt" type="datetime"/>
+
+        <one-to-many field="oAuthAccessTokens" target-entity="Jmondi\Gut\Entity\OAuth\OAuthAccessToken" mapped-by="oAuthCLient">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <order-by>
+                <order-by-field name="createdAt" direction="DESC" />
+            </order-by>
+        </one-to-many>
+    </entity>
+
+</doctrine-mapping>

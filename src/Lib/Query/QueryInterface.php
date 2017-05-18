@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Lib\Query;
 
-use inklabs\kommerce\Lib\ActionInterface;
+use Jmondi\Gut\Lib\Action\ActionInterface;
 
 interface QueryInterface extends ActionInterface
 {

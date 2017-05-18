@@ -1,6 +1,7 @@
 <?php
-namespace Jmondi\Gut\App\Uuid;
+namespace Jmondi\Gut\Entity\Uuid;
 
+use Jmondi\Gut\Entity\Exception\InvalidArgumentException;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 use Ramsey\Uuid\UuidInterface as RamseyUuidInterface;
 
@@ -21,15 +22,23 @@ class Uuid implements UuidInterface
 
     public static function fromString(string $uuidString): UuidInterface
     {
-        return new self(RamseyUuid::fromString($uuidString));
+        try {
+            return new self(RamseyUuid::fromString($uuidString));
+        } catch (\Exception $e) {
+            throw InvalidArgumentException::invalidUuid();
+        }
     }
 
     public static function fromBytes(string $uuidBytes): UuidInterface
     {
-        return new self(RamseyUuid::fromBytes($uuidBytes));
+        try {
+            return new self(RamseyUuid::fromBytes($uuidBytes));
+        } catch (\Exception $e) {
+            throw InvalidArgumentException::invalidUuid();
+        }
     }
 
-    public function toHex(): string
+    public function getHex(): string
     {
         return $this->ramseyUuid->getHex();
     }
