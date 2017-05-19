@@ -22,17 +22,18 @@ abstract class AbstractClientLibrary
     protected $sdkTemplateGenerator;
 
     abstract public static function createNewClient();
+    abstract public function renderFullSDK(): void;
 
     protected function __construct(string $clientLibraryName, string $extension)
     {
         $this->name = $clientLibraryName;
-        $this->templatePath = realpath(__DIR__ . '/../../../templates/api-client-libraries/' . $this->name . '/');
-        $this->outputPath = realpath(__DIR__ . '/../../../api-client-libraries/' . $this->name . '/');
+        $this->templatePath = realpath(__DIR__ . '/../../../../templates/api-client-libraries/' . $this->name . '/');
+        $this->outputPath = realpath(__DIR__ . '/../../../../api-client-libraries/' . $this->name . '/');
         $this->extension = $extension;
         $this->apiDescriber = new ApiDescriber();
     }
 
-    public function render(string $templateName, array $parameters, string $outputFile): void
+    protected function render(string $templateName, array $parameters, string $outputFile): void
     {
         $twigContent = $this->getTemplateGenerator()->renderView(
             $this->name,

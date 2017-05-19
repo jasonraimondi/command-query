@@ -16,7 +16,6 @@ class ApiClientLibraryGenerator
     public function execute()
     {
         $typescriptClient = TypescriptClient::createNewClient();
-        $typescriptClient->createActionFactory();
-        $typescriptClient->createAllActions();
+        $typescriptClient->renderFullSDK();
     }
 }

@@ -8,7 +8,15 @@ final class TypescriptClient extends AbstractClientLibrary
         return new static('typescript', 'ts');
     }
 
-    public function createActionFactory()
+    public function renderFullSDK(): void
+    {
+        $this->createActionFactory();
+        $this->createTypeFactory();
+        $this->createAllActions();
+//        $this->createAllTypes();
+    }
+
+    private function createActionFactory()
     {
         $this->render(
             'action-factory',
@@ -19,7 +27,18 @@ final class TypescriptClient extends AbstractClientLibrary
         );
     }
 
-    public function createAllActions()
+    private function createTypeFactory()
+    {
+        $this->render(
+            'type-factory',
+            [
+                'typeClasses' => $something = iterator_to_array($this->apiDescriber->getAllEntityTypes()),
+            ],
+            'Api/type-factory'
+        );
+    }
+
+    private function createAllActions()
     {
         foreach ($this->apiDescriber->getAllActionClasses() as $action) {
             $this->render(
@@ -32,7 +51,7 @@ final class TypescriptClient extends AbstractClientLibrary
         }
     }
 
-    public function createAllTypes()
+    private function createAllTypes()
     {
         foreach ($this->apiDescriber->getAllEntityTypes() as $type) {
             $this->render(
