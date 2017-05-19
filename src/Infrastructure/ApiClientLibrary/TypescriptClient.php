@@ -1,9 +1,6 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\ApiClientLibrary;
 
-use Jmondi\Gut\Infrastructure\Template\Twig\TemplateNamespace;
-use Jmondi\Gut\Infrastructure\Template\Twig\TwigTemplateGenerator;
-
 class TypescriptClient extends AbstractClientLibrary
 {
     public static function createNewClient(): self

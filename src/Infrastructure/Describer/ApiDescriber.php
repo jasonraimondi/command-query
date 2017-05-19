@@ -1,8 +1,6 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Describer;
 
-use ReflectionClass;
-
 class ApiDescriber
 {
     /** @var string */
@@ -19,11 +17,11 @@ class ApiDescriber
      */
     public function getAllEntityTypes()
     {
-        $entityDirectoryPath = $this->getDirectoryPathStringRelativeSrc('Entity');
+        $entityDirectoryPath = $this->getDirectoryPathStringRelativeSrc('DomainModel');
         $glotResults = glob($entityDirectoryPath . '/**/*Type.php');
         foreach($glotResults as $filePath) {
             if (! strpos($filePath, '/Abstract')) {
-                yield new ApplicationReflectionClass($this->getNamespaceString($filePath, 'Entity'));
+                yield new ApplicationReflectionClass($this->getNamespaceString($filePath, 'DomainModel'));
             }
         };
     }
@@ -49,6 +47,6 @@ class ApiDescriber
 
     private function getDirectoryPathStringRelativeSrc(string $needle): string
     {
-        return realpath(__DIR__ . '/../') . '/' . $needle;
+        return realpath(__DIR__ . '/../../') . '/' . $needle;
     }
 }
