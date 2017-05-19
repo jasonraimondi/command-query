@@ -13,7 +13,7 @@ final class TypescriptClient extends AbstractClientLibrary
         $this->createActionFactory();
         $this->createTypeFactory();
         $this->createAllActions();
-//        $this->createAllTypes();
+        $this->createAllTypes();
     }
 
     private function createActionFactory()
@@ -59,7 +59,7 @@ final class TypescriptClient extends AbstractClientLibrary
                 [
                     'type' => $type,
                 ],
-                'Api/Type/' . lcfirst($type->getActionDomain())
+                'Api/Type/' . lcfirst($type->getTypeDomain())
             );
         }
     }
