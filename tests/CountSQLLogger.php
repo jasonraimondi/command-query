@@ -2,7 +2,7 @@
 namespace Jmondi\Gut\Test;
 
 use Doctrine\DBAL\Logging\SQLLogger;
-use Jmondi\Gut\Entity\Uuid\Uuid;
+use Jmondi\Gut\DomainModel\Entity\Uuid\Uuid;
 
 /**
  * A SQL logger that counts the total number of queries.

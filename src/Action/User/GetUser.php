@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Action\User;
 
-use Jmondi\Gut\Lib\Query\QueryInterface;
+use Jmondi\Gut\Infrastructure\Lib\Query\QueryInterface;
 
 class GetUser implements QueryInterface
 {

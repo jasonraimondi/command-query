@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Test;
 
-use Jmondi\Gut\Doctrine\UuidEntityInterface;
+use Jmondi\Gut\DomainModel\Doctrine\UuidEntityInterface;
 
 abstract class ApplicationTest extends \PHPUnit_Framework_TestCase
 {

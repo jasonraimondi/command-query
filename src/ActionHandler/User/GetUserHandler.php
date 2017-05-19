@@ -2,10 +2,10 @@
 namespace Jmondi\Gut\ActionHandler\User;
 
 use Jmondi\Gut\Action\User\GetUser;
-use Jmondi\Gut\Entity\User\User;
-use Jmondi\Gut\Lib\Autorization\AuthorizationContextInterface;
-use Jmondi\Gut\Lib\Query\QueryHandlerInterface;
-use Jmondi\Gut\Repository\User\UserRepositoryInterface;
+use Jmondi\Gut\DomainModel\User\User;
+use Jmondi\Gut\Infrastructure\Lib\Autorization\AuthorizationContextInterface;
+use Jmondi\Gut\Infrastructure\Lib\Query\QueryHandlerInterface;
+use Jmondi\Gut\Infrastructure\Repository\User\UserRepositoryInterface;
 
 final class GetUserHandler implements QueryHandlerInterface
 {

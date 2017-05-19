@@ -4,7 +4,7 @@ namespace Jmondi\Gut\Test;
 use Doctrine;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\EntityManager;
-use Jmondi\Gut\App\DoctrineHelper;
+use Jmondi\Gut\Infrastructure\App\DoctrineHelper;
 
 abstract class EntityRepositoryTestCase extends ApplicationTest
 {
