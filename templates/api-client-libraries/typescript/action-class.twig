@@ -1,0 +1,19 @@
+{# @var action \Jmondi\Gut\Describer\ApplicationReflectionClass #}
+
+import { RestClientInterface } from '../../RestClient/rest-client';
+
+export class {{ action.actionDomain }} {
+    constructor(private restClient: RestClientInterface) {}
+
+    public {{ action.shortName | lowercaseFirst }}(userId: string, withData: string[] = null) {
+        return this.restClient.get(
+            'api/v1/Action/User/GetUser',
+            {
+            {# @var value \ReflectionMethod #}
+            {%- for param in action.constructor.parameters -%}
+                {{ param.name }},
+            {% endfor -%}
+            }
+        );
+    }
+}

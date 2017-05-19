@@ -1,0 +1,16 @@
+{# @var actionClasses \Jmondi\Gut\Describer\ApplicationReflectionClass[] #}
+import { RestClientInterface } from '../RestClient/rest-client';
+
+{% for action in actionClasses %}
+import { {{ action.shortName }} } from './Action/{{ action.shortName }}';
+{% endfor %}
+
+export class ActionFactory {
+    constructor(private restClient: RestClientInterface) {}
+
+    {% for action in actionClasses -%}
+        public {{ action.actionDomain }}() {
+        return new {{ action.actionDomain }}(this.restClient);
+    }
+    {% endfor %}
+}

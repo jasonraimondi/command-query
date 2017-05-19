@@ -5,7 +5,7 @@ use Jmondi\Gut\Template\Exceptions\TemplateGeneratorException;
 use Twig_Environment;
 use Twig_Error_Loader;
 
-class BlogTemplateGenerator
+class SDKTemplateGenerator
 {
     /** @var Twig_Environment */
     private $twigEnvironment;
@@ -15,21 +15,21 @@ class BlogTemplateGenerator
         $this->twigEnvironment = $twigEnvironment;
     }
 
-    public function renderView(string $templateName, array $parameters = []): string
+    public function renderView(string $templateNamespace, string $templateName, array $parameters = []): string
     {
-        $templateName = $this->getTemplateFile($templateName);
+        $templateName = $this->getTemplateFile($templateNamespace, $templateName);
 
         try {
             $template = $this->twigEnvironment->load($templateName);
         } catch (Twig_Error_Loader $e) {
-            throw TemplateGeneratorException::templateNotFound($templateName);
+            throw TemplateGeneratorException::templateNotFound($e->getMessage());
         }
 
         return $template->render($parameters);
     }
 
-    private function getTemplateFile(string $templateName): string
+    private function getTemplateFile(string $templateNamespace, string $templateName): string
     {
-        return '@site/' . $templateName . '.twig';
+        return '@' . $templateNamespace . '/' . $templateName . '.twig';
     }
 }

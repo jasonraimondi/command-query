@@ -28,6 +28,10 @@ class TwigTemplateGenerator
         $this->twigEnvironment->addExtension(
             new TwigMarkdownExtension(MarkdownParser::createFromNothing())
         );
+
+        $this->twigEnvironment->addExtension(
+            new TwigLowercaseFirstExtension()
+        );
     }
 
     public static function createFromTemplateNamespace(TemplateNamespace $templateNamespace)
