@@ -3,8 +3,6 @@
 import { RestClientInterface } from '../../RestClient/rest-client';
 
 export class {{ type.typeDomain }} {
-    constructor(private restClient: RestClientInterface) {}
-
     public {{ type.shortName | lowercaseFirst }}(userId: string, withData: string[] = null) {
         return this.restClient.get(
             'api/v1/Action/User/GetUser',

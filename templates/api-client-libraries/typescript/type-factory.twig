@@ -1,12 +1,12 @@
 {# @var typeClasses \Jmondi\Gut\Infrastructure\Describer\ApplicationReflectionClass[] #}
 {% for type in typeClasses %}
-import { {{ type.typeDomain | lowercaseFirst }} } from './Type/{{ type.typeDomain | lowercaseFirst }}';
+import { {{ type.typeDomain }} } from './Type/{{ type.typeDomain | lowercaseFirst }}';
 {% endfor %}
 
 export class TypeFactory {
     {% for type in typeClasses -%}
         public {{ type.typeDomain | lowercaseFirst }}() {
-        return new {{ type.typeDomain | lowercaseFirst }}();
+        return new {{ type.typeDomain }}();
     }
     {% endfor %}
 
