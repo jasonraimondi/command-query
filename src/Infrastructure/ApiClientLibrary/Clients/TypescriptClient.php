@@ -1,7 +1,7 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\ApiClientLibrary;
+namespace Jmondi\Gut\Infrastructure\ApiClientLibrary\Clients;
 
-class TypescriptClient extends AbstractClientLibrary
+final class TypescriptClient extends AbstractClientLibrary
 {
     public static function createNewClient(): self
     {

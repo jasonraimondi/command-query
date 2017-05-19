@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\ApiClientLibrary;
+namespace Jmondi\Gut\Infrastructure\ApiClientLibrary\Clients;
 
 use Jmondi\Gut\Infrastructure\Describer\ApiDescriber;
 use Jmondi\Gut\Infrastructure\Template\SDKTemplateGenerator;
