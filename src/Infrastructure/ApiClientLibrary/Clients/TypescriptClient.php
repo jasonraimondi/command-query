@@ -24,7 +24,7 @@ final class TypescriptClient extends AbstractClientLibrary
                 'actionClasses' => $something = iterator_to_array($this->apiDescriber->getAllQueries()),
             ],
             'Api',
-            'action-factory'
+            'ActionFactory'
         );
     }
 
@@ -36,9 +36,8 @@ final class TypescriptClient extends AbstractClientLibrary
                 'typeClasses' => $something = iterator_to_array($this->apiDescriber->getAllTypeReflectionClasses()),
             ],
             'Api',
-            'type-factory'
+            'TypeFactory'
         );
-
     }
 
     private function createAllActions()
@@ -50,7 +49,7 @@ final class TypescriptClient extends AbstractClientLibrary
                     'action' => $action,
                 ],
                 'Api/Action',
-                $action->getActionDomain()
+                $action->getActionDomain() . 'Action'
             );
         }
     }
@@ -65,7 +64,7 @@ final class TypescriptClient extends AbstractClientLibrary
                     'typeDetails' => $type->newInstanceWithoutConstructor()::getTypeDetails(),
                 ],
                 'Api/Type',
-                $type->getShortName()
+                $type->getTypeDomain() . 'Type'
             );
         }
     }

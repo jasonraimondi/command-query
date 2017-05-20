@@ -1,15 +1,25 @@
 {# @var type \Jmondi\Gut\Infrastructure\Describer\ApplicationReflectionClass #}
-export class {{ type.shortName }} {
+export class {{ type.typeDomain }}Type {
 
     public {{ type.shortName }}() {
         return [
-        {% for typeNewKey in typeDetails %}
+        {% for typeNewKey in typeDetails -%}
         {
-            {% for key, value in typeNewKey.jsonSerialize %}
-                "{{ key }}": "{{ value }}",
-            {% endfor %}
+            {% for key, value in typeNewKey.type.jsonSerialize -%}
+                "{{ key }}": {% spaceless %}
+                    {% if value is same as(true) %}
+                        true
+                    {% elseif value is same as(false) %}
+                        false
+                    {% elseif value is null %}
+                        null
+                    {% else %}
+                        "{{ value }}"
+                    {% endif %}
+                {% endspaceless %},
+            {% endfor -%}
         },
-        {% endfor %}
+        {% endfor -%}
         ]
     }
 }

@@ -1,11 +1,11 @@
 {# @var action \Jmondi\Gut\Infrastructure\Describer\ApplicationReflectionClass #}
 
-import { RestClientInterface } from '../../RestClient/rest-client';
+import { RestClientInterface } from '../../RestClient/RestClient';
 
-export class {{ action.actionDomain }} {
+export class {{ action.actionDomain }}Action {
     constructor(private restClient: RestClientInterface) {}
 
-    public {{ action.shortName | lowercaseFirst }}(userId: string, withData: string[] = null) {
+    public {{ action.shortName }}(userId: string, withData: string[] = null) {
         return this.restClient.get(
             'api/v1/Action/User/GetUser',
             {
