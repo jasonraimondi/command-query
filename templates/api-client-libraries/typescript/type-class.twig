@@ -1,17 +1,15 @@
 {# @var type \Jmondi\Gut\Infrastructure\Describer\ApplicationReflectionClass #}
+export class {{ type.shortName }} {
 
-import { RestClientInterface } from '../../RestClient/rest-client';
-
-export class {{ type.typeDomain }} {
-    public {{ type.shortName | lowercaseFirst }}(userId: string, withData: string[] = null) {
-        return this.restClient.get(
-            'api/v1/Action/User/GetUser',
-            {
-            {# @var value \ReflectionMethod #}
-            {%- for param in type.constructor.parameters -%}
-                {{ param.name }},
-            {% endfor -%}
-            }
-        );
+    public {{ type.shortName }}() {
+        return [
+        {% for typeNewKey in typeDetails %}
+        {
+            {% for key, value in typeNewKey.jsonSerialize %}
+                "{{ key }}": "{{ value }}",
+            {% endfor %}
+        },
+        {% endfor %}
+        ]
     }
 }

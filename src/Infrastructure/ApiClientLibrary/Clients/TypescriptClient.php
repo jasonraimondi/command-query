@@ -21,9 +21,10 @@ final class TypescriptClient extends AbstractClientLibrary
         $this->render(
             'action-factory',
             [
-                'actionClasses' => $something = iterator_to_array($this->apiDescriber->getAllActionClasses()),
+                'actionClasses' => $something = iterator_to_array($this->apiDescriber->getAllQueries()),
             ],
-            'Api/action-factory'
+            'Api',
+            'action-factory'
         );
     }
 
@@ -32,34 +33,39 @@ final class TypescriptClient extends AbstractClientLibrary
         $this->render(
             'type-factory',
             [
-                'typeClasses' => $something = iterator_to_array($this->apiDescriber->getAllEntityTypes()),
+                'typeClasses' => $something = iterator_to_array($this->apiDescriber->getAllTypeReflectionClasses()),
             ],
-            'Api/type-factory'
+            'Api',
+            'type-factory'
         );
+
     }
 
     private function createAllActions()
     {
-        foreach ($this->apiDescriber->getAllActionClasses() as $action) {
+        foreach ($this->apiDescriber->getAllQueries() as $action) {
             $this->render(
                 'action-class',
                 [
                     'action' => $action,
                 ],
-                'Api/Action/' . lcfirst($action->getActionDomain())
+                'Api/Action',
+                $action->getActionDomain()
             );
         }
     }
 
     private function createAllTypes()
     {
-        foreach ($this->apiDescriber->getAllEntityTypes() as $type) {
+        foreach ($this->apiDescriber->getAllTypeReflectionClasses() as $type) {
             $this->render(
                 'type-class',
                 [
                     'type' => $type,
+                    'typeDetails' => $type->newInstanceWithoutConstructor()::getTypeDetails(),
                 ],
-                'Api/Type/' . lcfirst($type->getTypeDomain())
+                'Api/Type',
+                $type->getShortName()
             );
         }
     }

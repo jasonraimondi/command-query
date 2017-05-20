@@ -14,9 +14,9 @@ abstract class AbstractType implements \JsonSerializable
 
     public function getTypeDetail(): TypeDetail
     {
-        foreach (static::getTypeDetails() as $typeOption) {
-            if ($typeOption->getId() === $this->id) {
-                return $typeOption;
+        foreach (static::getTypeDetails() as $typeDetail) {
+            if ($typeDetail->getId() === $this->id) {
+                return $typeDetail;
             }
         }
 
@@ -27,7 +27,7 @@ abstract class AbstractType implements \JsonSerializable
     {
         return $this->id === $value;
     }
-
+//
     public function jsonSerialize()
     {
         return $this->getTypeDetail()->jsonSerialize();

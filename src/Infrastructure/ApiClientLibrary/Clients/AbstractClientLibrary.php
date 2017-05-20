@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\ApiClientLibrary\Clients;
 
-use Jmondi\Gut\Infrastructure\Describer\ApiDescriber;
+use Jmondi\Gut\Infrastructure\Describer\DomainDescriber;
 use Jmondi\Gut\Infrastructure\Template\SDKTemplateGenerator;
 use Jmondi\Gut\Infrastructure\Template\Twig\TemplateNamespace;
 use Jmondi\Gut\Infrastructure\Template\Twig\TwigTemplateGenerator;
@@ -16,7 +16,7 @@ abstract class AbstractClientLibrary
     protected $name;
     /** @var string */
     protected $extension;
-    /** @var ApiDescriber */
+    /** @var DomainDescriber */
     protected $apiDescriber;
     /** @var SDKTemplateGenerator */
     protected $sdkTemplateGenerator;
@@ -30,10 +30,10 @@ abstract class AbstractClientLibrary
         $this->templatePath = realpath(__DIR__ . '/../../../../templates/api-client-libraries/' . $this->name . '/');
         $this->outputPath = realpath(__DIR__ . '/../../../../api-client-libraries/' . $this->name . '/');
         $this->extension = $extension;
-        $this->apiDescriber = new ApiDescriber();
+        $this->apiDescriber = new DomainDescriber();
     }
 
-    protected function render(string $templateName, array $parameters, string $outputFile): void
+    protected function render(string $templateName, array $parameters, string $outputFilePath, string $outputFileName): void
     {
         $twigContent = $this->getTemplateGenerator()->renderView(
             $this->name,
@@ -41,7 +41,13 @@ abstract class AbstractClientLibrary
             $parameters
         );
 
-        file_put_contents($this->outputPath . '/' . $outputFile . '.' . $this->extension, $twigContent);
+        $fullOutput = $this->outputPath . '/' . $outputFilePath;
+
+        if (!file_exists($fullOutput)) {
+            mkdir($fullOutput, 0775, true);
+        }
+
+        file_put_contents($fullOutput . '/' . $outputFileName . '.' . $this->extension, $twigContent);
     }
 
     protected function getTemplateGenerator(): SDKTemplateGenerator
@@ -60,5 +66,12 @@ abstract class AbstractClientLibrary
         }
 
         return $this->sdkTemplateGenerator;
+    }
+
+    // https://secure.php.net/manual/en/function.get-class.php#114568
+    protected function getBaseClassName(string $classname): string
+    {
+        if ($pos = strrpos($classname, '\\')) return substr($classname, $pos + 1);
+        return $pos;
     }
 }

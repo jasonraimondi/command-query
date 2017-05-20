@@ -33,6 +33,11 @@ class TypeDetail implements \JsonSerializable
         ];
     }
 
+    public function getId()
+    {
+        return $this->type->getId();
+    }
+
     public function getType(): AbstractType
     {
         return $this->type;
