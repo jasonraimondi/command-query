@@ -1,6 +1,6 @@
 {
-    "name": "jmondi/cqs",
-    "description": "An Event Based Boilerplate",
+    "name": "jmondi/domain",
+    "description": "Command Based PHP Architecture",
     "license": "MIT",
     "authors": [
         {
