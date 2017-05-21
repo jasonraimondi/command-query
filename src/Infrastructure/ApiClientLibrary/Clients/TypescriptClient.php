@@ -5,7 +5,7 @@ final class TypescriptClient extends AbstractClientLibrary
 {
     public static function createNewClient(): self
     {
-        return new static('typescript', 'ts');
+        return new static('ts', 'typescript', 'src');
     }
 
     public function renderFullSDK(): void
