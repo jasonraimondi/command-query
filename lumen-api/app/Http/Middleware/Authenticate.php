@@ -1,44 +1,65 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
+use Jmondi\Gut\DomainModel\Entity\Error\ErrorDetail;
+use Jmondi\Gut\DomainModel\Entity\Error\ErrorCollection;
+use Jmondi\Gut\DomainModel\Exception\ApplicationException;
+use Jmondi\Gut\DomainModel\Exception\EntityNotFoundException;
+use Jmondi\Gut\DomainModel\OAuth\OAuthAccessTokenException;
+use Jmondi\Gut\Infrastructure\Lib\ApplicationCore;
 
 class Authenticate
 {
-    /**
-     * The authentication guard factory instance.
-     *
-     * @var \Illuminate\Contracts\Auth\Factory
-     */
-    protected $auth;
+    /** @var ApplicationCore */
+    private $applicationCore;
 
-    /**
-     * Create a new middleware instance.
-     *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
-     * @return void
-     */
-    public function __construct(Auth $auth)
+    public function __construct(ApplicationCore $applicationCore)
     {
-        $this->auth = $auth;
+        $this->applicationCore = $applicationCore;
     }
 
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  \Closure  $next
-     * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+        try {
+            $oAuthAccessTokenId = $this->getOAuthAccessTokenId($request);
+            $this->applicationCore->setOauthAccessToken($oAuthAccessTokenId);
+        } catch (OAuthAccessTokenException $e) {
+            return response()->json(
+                new ErrorCollection([
+                    new ErrorDetail('Unauthorized Bearer Token', 'Unauthorized Access')
+                ]),
+                401
+            );
+        } catch (ApplicationException | EntityNotFoundException $e) {
+            return response()->json(
+                new ErrorCollection([
+                    new ErrorDetail($e->getMessage(), 'Unauthorized Access')
+                ]),
+                401
+            );
+        } catch (\Throwable $e) {
+            return response()->json(
+                new ErrorCollection([
+                    new ErrorDetail($e->getMessage(), 'Unauthorized Access')
+                ]),
+                401
+            );
         }
 
         return $next($request);
+    }
+
+    private function getOauthAccessTokenId(Request $request): string
+    {
+        $authorizationString = $request->header('authorization');
+        $oauthAccessTokenId = str_replace('Bearer ', '', $authorizationString);
+        return $oauthAccessTokenId;
     }
 }
