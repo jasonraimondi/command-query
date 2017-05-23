@@ -1,10 +1,10 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Lib\Autorization;
+namespace Jmondi\Gut\Infrastructure\Autorization;
 
 interface AuthorizationContextInterface
 {
     /**
      * @throws AuthorizationContextException
      */
-    public function verifyIsAdmin();
+    public function verifyIsAuthenticated();
 }

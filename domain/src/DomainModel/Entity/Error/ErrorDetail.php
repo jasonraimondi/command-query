@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\DomainModel\Entity\Error;
 
-class Error implements \JsonSerializable
+class ErrorDetail implements \JsonSerializable
 {
     /** @var string */
     private $detail;

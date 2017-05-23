@@ -10,18 +10,13 @@ class OAuthAccessTokenException extends ApplicationException
         parent::__construct($message, $code, $previous);
     }
 
-    public static function expiredAccessToken()
+    public static function expired()
     {
-        return new self('Expired access token');
+        return new self('Expired OAuthAccessToken');
     }
 
-    public static function revokedAccessToken()
+    public static function revoked()
     {
-        return new self('Revoked access token');
-    }
-
-    public static function incorrectEntityType()
-    {
-        return new self('Incorrect Entity Type');
+        return new self('Revoked OAuthAccessToken');
     }
 }

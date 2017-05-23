@@ -6,7 +6,7 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\EntityManager;
 use Jmondi\Gut\Infrastructure\App\DoctrineHelper;
 
-abstract class EntityRepositoryTestCase extends ApplicationTest
+abstract class EntityRepositoryTestCaseCase extends ApplicationTestCase
 {
     /** @var EntityManager */
     protected $entityManager;

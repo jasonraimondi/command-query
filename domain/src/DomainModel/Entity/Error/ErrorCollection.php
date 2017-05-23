@@ -5,7 +5,7 @@ use JsonSerializable;
 
 class ErrorCollection implements JsonSerializable
 {
-    /** @var array|Error[] */
+    /** @var array|ErrorDetail[] */
     private $errors;
 
     public function __construct(array $errors)

@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Lib\Query;
 
-use Jmondi\Gut\Infrastructure\Lib\Autorization\AuthorizationContextInterface;
+use Jmondi\Gut\Infrastructure\Autorization\AuthorizationContextInterface;
 use Jmondi\Gut\Infrastructure\Lib\MapperInterface;
 
 class QueryBus implements QueryBusInterface
@@ -20,14 +20,10 @@ class QueryBus implements QueryBusInterface
         $this->mapper = $mapper;
     }
 
-    /**
-     * @param QueryInterface $query
-     * @return ResponseInterface
-     */
-    public function execute(QueryInterface $query)
+    public function execute(QueryInterface $query): ResponseInterface
     {
         $handler = $this->mapper->getQueryHandler($query);
         $handler->verifyAuthorization($this->authorizationContext);
-        return $handler->handle();
+        return $handler->execute();
     }
 }

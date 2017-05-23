@@ -3,7 +3,7 @@ namespace Jmondi\Gut\Test;
 
 use Jmondi\Gut\DomainModel\Doctrine\UuidEntityInterface;
 
-abstract class ApplicationTest extends \PHPUnit_Framework_TestCase
+abstract class ApplicationTestCase extends \PHPUnit_Framework_TestCase
 {
     protected function assertEntitiesEqual(UuidEntityInterface $entity1, UuidEntityInterface $entity2)
     {
