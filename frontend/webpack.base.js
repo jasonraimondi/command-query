@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const projectRoot = path.resolve(__dirname, './');
 
@@ -51,6 +52,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: projectRoot + '/src/index.html'
+    }),
     new ExtractTextPlugin({
       filename: 'css/[name].package.css',
       allChunks: true,
