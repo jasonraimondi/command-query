@@ -8,7 +8,7 @@ const projectRoot = path.resolve(__dirname, './');
 module.exports = {
   context: projectRoot + '/src',
   entry: {
-    app: projectRoot + '/src/app.ts',
+    app: projectRoot + '/src/main.ts',
   },
   output: {
     path: projectRoot + '/dist',
