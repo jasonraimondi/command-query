@@ -26,9 +26,11 @@ abstract class AbstractClientLibrary
 
     protected function __construct(string $extension, string $clientLibraryName, string $pathInClientLibrary = '')
     {
+        $projectRootDir = realpath(__DIR__ . '/../../../../');
+
         $this->name = $clientLibraryName;
-        $this->templatePath = realpath(__DIR__ . '/../../../../templates/api-client-libraries/' . $this->name);
-        $this->outputPath = realpath(__DIR__ . '/../../../../api-client-libraries/' . $this->name . '/' . $pathInClientLibrary . '/');
+        $this->templatePath = $projectRootDir . '/api-client-libraries/_templates/' . $this->name;
+        $this->outputPath = $projectRootDir . 'api-client-libraries/' . $this->name . '/' . $pathInClientLibrary . '/';
         $this->extension = $extension;
         $this->apiDescriber = new DomainDescriber();
     }
@@ -69,9 +71,10 @@ abstract class AbstractClientLibrary
     }
 
     // https://secure.php.net/manual/en/function.get-class.php#114568
-    protected function getBaseClassName(string $classname): string
+    // we are just grabbing the class name without the full namespace
+    protected function getBaseClassName(string $className): string
     {
-        if ($pos = strrpos($classname, '\\')) return substr($classname, $pos + 1);
+        if ($pos = strrpos($className, '\\')) return substr($className, $pos + 1);
         return $pos;
     }
 }
