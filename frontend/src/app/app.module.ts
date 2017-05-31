@@ -4,25 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { AppRouterModule } from './app.routing';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     JsonpModule,
-    AppRouterModule
   ],
-  providers: [
-    // AngularRestClient,
-    // JmondiAPIClient
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
