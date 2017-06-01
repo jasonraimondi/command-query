@@ -65,13 +65,15 @@ module.exports = {
       template: projectRoot + '/src/index.html'
     }),
 
-    // https://github.com/angular/angular/issues/14898#issuecomment-284039716
+    // @see https://github.com/angular/angular/issues/14898#issuecomment-284039716
     new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)@angular/,
       projectRoot + '/src'
     ),
 
 
+    // @see https://angular.io/docs/ts/latest/guide/webpack.html#!#commons-chunk-plugin
+    //
     // The CommonsChunkPlugin identifies the hierarchy among three chunks: app -> vendor -> polyfills.
     // Where Webpack finds that app has shared dependencies with vendor, it removes them from app. It
     // would remove polyfills from vendor if they shared dependencies, which they don't.
