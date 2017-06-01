@@ -1,5 +1,6 @@
-declare const __IN_DEBUG__: boolean;
+import './scss/style';
 
+declare const __IN_DEBUG__: boolean;
 
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';

@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
+const tslint = require('./tslint');
 const projectRoot = path.resolve(__dirname, './');
 const pathsToClean = ['dist'];
 const cleanOptions = {
@@ -11,7 +12,6 @@ const cleanOptions = {
   verbose: true,
   dry: false
 };
-
 
 module.exports = {
   context: projectRoot + '/src',
@@ -39,6 +39,12 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.ts$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+        options: tslint
+      },
+      {
         test: /\.(css|scss)$/,
         loader: ExtractTextPlugin.extract({
           use: 'css-loader!sass-loader',
@@ -48,7 +54,7 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/,
         loaders: [
-          'file-loader?hash=sha512&digest=hex&name=[name]_[hash].[ext]&outputPath=images/',
+          'file-loader?hash=sha512&digest=hex&name=[name].[hash].image.[ext]&outputPath=images/',
           'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
         ]
       },
@@ -66,6 +72,8 @@ module.exports = {
     }),
 
     // @see https://github.com/angular/angular/issues/14898#issuecomment-284039716
+    //
+    // This resolves a console warning regarding core.es5.js
     new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)@angular/,
       projectRoot + '/src'
