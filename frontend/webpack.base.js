@@ -1,5 +1,6 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -15,14 +16,13 @@ const cleanOptions = {
 module.exports = {
   context: projectRoot + '/src',
   entry: {
-    // polyfills: projectRoot + '/src/polyfills.ts',
-    // vendor: projectRoot + '/src/vendor.ts',
+    polyfills: projectRoot + '/src/polyfills.ts',
+    vendor: projectRoot + '/src/vendor.ts',
     app: projectRoot + '/src/main.ts',
   },
   output: {
     path: projectRoot + '/dist',
-    filename: '[name].package.js',
-    chunkFilename: '[id].[hash].chunk.js'
+    filename: 'js/[name].[hash].package.js'
   },
   resolve: {
     extensions: ['.ts', '.js', '.css', '.scss', '.html', '.svg', '.jpg', '.jpeg', '.png', '.gif'],
@@ -30,19 +30,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html$/,
-        use: [{
-          loader: 'html-loader',
-          options: {
-            minimize: true,
-            removeComments: false,
-            collapseWhitespace: false
-          }
-        }],
+        test: /\.(html|css)$/,
+        use: 'raw-loader',
       },
       {
         test: /\.ts$/,
-        loader: 'awesome-typescript-loader',
+        loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
         exclude: /node_modules/,
       },
       {
@@ -63,14 +56,27 @@ module.exports = {
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: ['app', 'vendor', 'polyfills'],
-    //   filename: '[name].[hash].common.js'
-    // }),
     new CleanWebpackPlugin(pathsToClean, cleanOptions),
     new ExtractTextPlugin({
       filename: 'css/[name].[hash].package.css',
       allChunks: true,
+    }),
+    new HtmlWebpackPlugin({
+      template: projectRoot + '/src/index.html'
+    }),
+
+    // https://github.com/angular/angular/issues/14898#issuecomment-284039716
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)@angular/,
+      projectRoot + '/src'
+    ),
+
+
+    // The CommonsChunkPlugin identifies the hierarchy among three chunks: app -> vendor -> polyfills.
+    // Where Webpack finds that app has shared dependencies with vendor, it removes them from app. It
+    // would remove polyfills from vendor if they shared dependencies, which they don't.
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['app', 'vendor', 'polyfills']
     }),
   ],
 };
