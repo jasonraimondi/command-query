@@ -1,7 +1,9 @@
 <?php
 namespace Jmondi\Gut\DomainModel\Doctrine;
 
-interface EntityInterface
+use Jmondi\Gut\Infrastructure\Lib\Query\ResponseInterface;
+
+interface EntityInterface extends ResponseInterface
 {
     public function getId();
 }

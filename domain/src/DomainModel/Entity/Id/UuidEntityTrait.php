@@ -1,7 +1,8 @@
 <?php
 namespace Jmondi\Gut\DomainModel\Entity\Id;
 
-use Ramsey\Uuid\Uuid;
+use Jmondi\Gut\DomainModel\Entity\Uuid\Uuid;
+use Jmondi\Gut\DomainModel\Entity\Uuid\UuidInterface;
 
 trait UuidEntityTrait
 {
@@ -15,5 +16,10 @@ trait UuidEntityTrait
         }
 
         $this->id = $id;
+    }
+
+    protected function getUuid(): UuidInterface
+    {
+        return Uuid::fromString($this->id);
     }
 }

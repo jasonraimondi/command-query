@@ -3,7 +3,7 @@ namespace Jmondi\Gut\Infrastructure\Repository\User;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use Jmondi\Gut\DomainModel\Entity\Uuid\UuidInterface;
+use Jmondi\Gut\DomainModel\Entity\Uuid\Uuid;
 use Jmondi\Gut\DomainModel\Exception\EntityNotFoundException;
 use Jmondi\Gut\DomainModel\User\User;
 
@@ -17,12 +17,12 @@ class DoctrineUserRepository implements UserRepositoryInterface
         $this->entityManager = $entityManager;
     }
 
-    public function getById(UuidInterface $userId): User
+    public function getById(string $userId): User
     {
         return $this->returnOrThrowNotFoundException(
             $this->getQueryBuilder()
                 ->where('User.id = :userId')
-                ->setParameter('userId', $userId->toBytes())
+                ->setParameter('userId', Uuid::fromString($userId)->toBytes())
                 ->getQuery()
                 ->getOneOrNullResult()
         );

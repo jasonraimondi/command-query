@@ -5,6 +5,7 @@ use Doctrine;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\EntityManager;
 use Jmondi\Gut\Infrastructure\App\DoctrineHelper;
+use Jmondi\Gut\Infrastructure\Repository\RepositoryFactory;
 
 abstract class EntityRepositoryTestCaseCase extends ApplicationTestCase
 {
@@ -31,7 +32,6 @@ abstract class EntityRepositoryTestCaseCase extends ApplicationTestCase
 
     protected function tearDown()
     {
-        parent::tearDown();
         if ($this->entityManager !== null) {
             $this->entityManager->getConnection()->close();
         }
@@ -68,21 +68,21 @@ abstract class EntityRepositoryTestCaseCase extends ApplicationTestCase
     {
         $this->doctrineHelper->setup([
             'driver' => 'pdo_mysql',
-            'dbname' => $_ENV['DB_NAME'],
-            'user' => $_ENV['DB_USER'],
-            'password' => $_ENV['DB_PASSWORD'],
-            'host' => $_ENV['DB_HOST'],
-            'port' => $_ENV['DB_PORT'],
+            'dbname' => $_ENV['MYSQL_NAME'],
+            'user' => $_ENV['MYSQL_USER'],
+            'password' => $_ENV['MYSQL_PASSWORD'],
+            'host' => $_ENV['MYSQL_HOST'],
+            'port' => $_ENV['MYSQL_PORT'],
             'charset' => 'utf8',
         ]);
     }
+
     private function setupSqliteConnection()
     {
         $this->doctrineHelper->setup([
             'driver' => 'pdo_sqlite',
             'memory' => true,
         ]);
-        $this->doctrineHelper->addSqliteFunctions();
     }
 
     protected function getRepositoryFactory()
@@ -130,48 +130,5 @@ abstract class EntityRepositoryTestCaseCase extends ApplicationTestCase
     protected function rollback()
     {
         $this->entityManager->getConnection()->rollback();
-    }
-
-    /**
-     * @param EntityInterface|EntityInterface[] $entities
-     */
-    protected function persistEntityAndFlushClear($entities)
-    {
-        if (! is_array($entities)) {
-            $entities = [$entities];
-        }
-
-        foreach ($entities as $entity) {
-            $this->entityManager->persist($entity);
-        }
-
-        $this->entityManager->flush();
-        $this->entityManager->clear();
-    }
-
-    protected function executeRepositoryCRUD(RepositoryInterface $repository, EntityInterface $entity)
-    {
-        $repository->create($entity);
-        $repository->update($entity);
-        $repository->delete($entity);
-    }
-
-    /**
-     * @param IdEntityInterface[] $elements
-     */
-    protected function visitElements($elements)
-    {
-        foreach ($elements as $e) {
-            $e->getId()->toString();
-        }
-    }
-
-    protected function getInitializeWarehouse()
-    {
-        $warehouse = $this->dummyData->getWarehouse();
-        $this->entityManager->persist($warehouse);
-        $this->entityManager->flush();
-
-        return $warehouse;
     }
 }

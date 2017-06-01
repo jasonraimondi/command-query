@@ -7,7 +7,6 @@ use Jmondi\Gut\DomainModel\OAuth\OAuthAccessToken;
 use Jmondi\Gut\DomainModel\OAuth\OAuthAccessTokenException;
 use Jmondi\Gut\Infrastructure\App\DoctrineHelper;
 use Jmondi\Gut\Infrastructure\Authorization\OAuthAuthorizationContext;
-use Jmondi\Gut\Infrastructure\Autorization\AuthorizationContextInterface;
 use Jmondi\Gut\Infrastructure\Lib\Command\CommandBus;
 use Jmondi\Gut\Infrastructure\Lib\Command\CommandBusInterface;
 use Jmondi\Gut\Infrastructure\Lib\Command\CommandInterface;
@@ -24,8 +23,6 @@ final class ApplicationCore
     private $doctrineDbParams;
     /** @var null|OAuthAccessToken */
     private $oAuthAccessToken;
-    /** @var null|AuthorizationContextInterface */
-    private $authorizationContext;
     /** @var null|ArrayCache */
     private $cacheDriver;
     /** @var EntityManager */
@@ -46,11 +43,6 @@ final class ApplicationCore
         $this->getCommandBus()->execute($command);
     }
 
-    public function dispatchQuery(QueryInterface $query): ResponseInterface
-    {
-        return $this->getQueryBus()->execute($query);
-    }
-
     private function getCommandBus(): CommandBusInterface
     {
         static $commandBus = null;
@@ -63,16 +55,20 @@ final class ApplicationCore
         return $commandBus;
     }
 
-    private function getQueryBus(): QueryBusInterface
+    private function getAuthorizationContext()
     {
-        static $queryBus = null;
-        if ($queryBus === null) {
-            $queryBus = new QueryBus(
-                $this->getAuthorizationContext(),
-                $this->getMapper()
-            );
+        return new OAuthAuthorizationContext(
+            $this->getOAuthAccessToken()
+        );
+    }
+
+    private function getOAuthAccessToken(): OAuthAccessToken
+    {
+        if ($this->oAuthAccessToken === null) {
+            throw OAuthAccessTokenException::invalidOrNullAccessToken();
         }
-        return $queryBus;
+
+        return $this->oAuthAccessToken;
     }
 
     private function getMapper(): MapperInterface
@@ -85,6 +81,16 @@ final class ApplicationCore
             );
         }
         return $mapper;
+    }
+
+    public function getRepositoryFactory()
+    {
+        if ($this->repositoryFactory === null) {
+            $this->repositoryFactory = new RepositoryFactory(
+                $this->getEntityManager()
+            );
+        }
+        return $this->repositoryFactory;
     }
 
     private function getEntityManager()
@@ -110,16 +116,6 @@ final class ApplicationCore
         return $this->cacheDriver;
     }
 
-    public function getRepositoryFactory()
-    {
-        if ($this->repositoryFactory === null) {
-            $this->repositoryFactory = new RepositoryFactory(
-                $this->getEntityManager()
-            );
-        }
-        return $this->repositoryFactory;
-    }
-
     public function getServiceFactory(): ServiceFactory
     {
         if ($this->serviceFactory === null) {
@@ -128,5 +124,22 @@ final class ApplicationCore
             );
         }
         return $this->serviceFactory;
+    }
+
+    public function dispatchQuery(QueryInterface $query): ResponseInterface
+    {
+        return $this->getQueryBus()->execute($query);
+    }
+
+    private function getQueryBus(): QueryBusInterface
+    {
+        static $queryBus = null;
+        if ($queryBus === null) {
+            $queryBus = new QueryBus(
+                $this->getAuthorizationContext(),
+                $this->getMapper()
+            );
+        }
+        return $queryBus;
     }
 }

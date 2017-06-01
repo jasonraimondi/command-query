@@ -19,4 +19,9 @@ class OAuthAccessTokenException extends ApplicationException
     {
         return new self('Revoked OAuthAccessToken');
     }
+
+    public static function invalidOrNullAccessToken()
+    {
+        return new self('Invalid or Null Access Token');
+    }
 }
