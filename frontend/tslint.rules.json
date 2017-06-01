@@ -1,14 +1,34 @@
 {
   "extends": "tslint:recommended",
   "rules": {
-    "quotemark": [
+    "array-type": [true, "array"],
+    "ban-types": [true, ["Object", "Use {} instead."], ["String"]],
+    "eofline": true,
+    "indent": [true, "spaces", 4],
+    "max-line-length": [true, 120],
+    "member-ordering": [
       true,
-      "single",
-      "avoid-escape"
+      {
+        "order": [
+          {
+            "name": "static non-private",
+            "kinds": [
+              "public-static-field",
+              "protected-static-field",
+              "public-static-method",
+              "protected-static-method"
+            ]
+          },
+          "constructor"
+        ]
+      }
     ],
-    "semicolon": [
-      true,
-      "always"
-    ]
+    "no-any": true,
+    "no-console": true,
+    "no-empty-interface": true,
+    "no-irregular-whitespace": true,
+    "no-string-literal": true,
+    "quotemark": [true, "single", "avoid-escape"],
+    "semicolon": [true, "always"]
   }
 }
