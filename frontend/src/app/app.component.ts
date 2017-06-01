@@ -10,6 +10,5 @@ export class AppComponent {
   private title = 'app works!';
 
   constructor() {
-    console.log('hello');
   }
 }
