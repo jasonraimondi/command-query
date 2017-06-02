@@ -32,7 +32,6 @@ final class ApplicationCore
     /** @var null|ServiceFactory */
     private $serviceFactory;
 
-
     public function __construct(array $doctrineDbParams)
     {
         $this->doctrineDbParams = $doctrineDbParams;
@@ -41,6 +40,31 @@ final class ApplicationCore
     public function dispatchCommand(CommandInterface $command): void
     {
         $this->getCommandBus()->execute($command);
+    }
+
+    public function dispatchQuery(QueryInterface $query): ResponseInterface
+    {
+        return $this->getQueryBus()->execute($query);
+    }
+
+    public function getServiceFactory(): ServiceFactory
+    {
+        if ($this->serviceFactory === null) {
+            $this->serviceFactory = new ServiceFactory(
+                $this->getRepositoryFactory()
+            );
+        }
+        return $this->serviceFactory;
+    }
+
+    public function getRepositoryFactory()
+    {
+        if ($this->repositoryFactory === null) {
+            $this->repositoryFactory = new RepositoryFactory(
+                $this->getEntityManager()
+            );
+        }
+        return $this->repositoryFactory;
     }
 
     private function getCommandBus(): CommandBusInterface
@@ -55,20 +79,16 @@ final class ApplicationCore
         return $commandBus;
     }
 
-    private function getAuthorizationContext()
+    private function getQueryBus(): QueryBusInterface
     {
-        return new OAuthAuthorizationContext(
-            $this->getOAuthAccessToken()
-        );
-    }
-
-    private function getOAuthAccessToken(): OAuthAccessToken
-    {
-        if ($this->oAuthAccessToken === null) {
-            throw OAuthAccessTokenException::invalidOrNullAccessToken();
+        static $queryBus = null;
+        if ($queryBus === null) {
+            $queryBus = new QueryBus(
+                $this->getAuthorizationContext(),
+                $this->getMapper()
+            );
         }
-
-        return $this->oAuthAccessToken;
+        return $queryBus;
     }
 
     private function getMapper(): MapperInterface
@@ -83,29 +103,53 @@ final class ApplicationCore
         return $mapper;
     }
 
-    public function getRepositoryFactory()
-    {
-        if ($this->repositoryFactory === null) {
-            $this->repositoryFactory = new RepositoryFactory(
-                $this->getEntityManager()
-            );
-        }
-        return $this->repositoryFactory;
-    }
-
     private function getEntityManager()
     {
         if ($this->entityManager === null) {
             $cacheDriver = $this->getCacheDriver();
             $doctrineHelper = new DoctrineHelper($cacheDriver);
-            $doctrineHelper->setup([
-                'driver' => 'pdo_sqlite',
-                'path' => realpath(__DIR__ . '/../../../') . '/db.sqlite',
-            ]);
+            $doctrineHelper->setup($this->doctrineDbParams);
 
             $this->entityManager = $doctrineHelper->getEntityManager();
         }
         return $this->entityManager;
+    }
+
+    private function getAuthorizationContext()
+    {
+        return new OAuthAuthorizationContext(
+            $this->getOAuthAccessToken()
+        );
+    }
+
+    private function setOAuthAccessToken(string $oAuthAccessTokenId): void
+    {
+        $oAuthAccessToken = $this->getRepositoryFactory()
+            ->getOAuthAccessTokenRepository()
+            ->getById($oAuthAccessTokenId);
+
+        if ($oAuthAccessToken->isExpired()) {
+            throw OAuthAccessTokenException::expired();
+        }
+
+        if ($oAuthAccessToken->isRevoked()) {
+            throw OAuthAccessTokenException::revoked();
+        }
+
+        if ($oAuthAccessToken->isValid()) {
+            throw OAuthAccessTokenException::invalidOrNullAccessToken();
+        }
+
+        $this->oAuthAccessToken = $oAuthAccessToken;
+    }
+
+    private function getOAuthAccessToken(): OAuthAccessToken
+    {
+        if ($this->oAuthAccessToken === null) {
+            throw OAuthAccessTokenException::invalidOrNullAccessToken();
+        }
+
+        return $this->oAuthAccessToken;
     }
 
     private function getCacheDriver()
@@ -114,32 +158,5 @@ final class ApplicationCore
             $this->cacheDriver = new ArrayCache();
         }
         return $this->cacheDriver;
-    }
-
-    public function getServiceFactory(): ServiceFactory
-    {
-        if ($this->serviceFactory === null) {
-            $this->serviceFactory = new ServiceFactory(
-                $this->getRepositoryFactory()
-            );
-        }
-        return $this->serviceFactory;
-    }
-
-    public function dispatchQuery(QueryInterface $query): ResponseInterface
-    {
-        return $this->getQueryBus()->execute($query);
-    }
-
-    private function getQueryBus(): QueryBusInterface
-    {
-        static $queryBus = null;
-        if ($queryBus === null) {
-            $queryBus = new QueryBus(
-                $this->getAuthorizationContext(),
-                $this->getMapper()
-            );
-        }
-        return $queryBus;
     }
 }

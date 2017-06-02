@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\App;
+namespace Jmondi\Gut\Infrastructure\Lib\Doctrine;
 
 use Doctrine;
 use Jmondi\Gut\DomainModel\Doctrine\Extension\UuidBinaryType;
@@ -22,13 +22,15 @@ class DoctrineHelper
 
     public function __construct(Doctrine\Common\Cache\CacheProvider $cacheDriver = null)
     {
-        $paths = [__DIR__ . '/../Entity'];
+        $paths = [__DIR__ . '/../../../DomainModel'];
         $isDevMode = true;
 
         $this->config = Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
-        $xmlDriver = new Doctrine\ORM\Mapping\Driver\XmlDriver(realpath(__DIR__ . '/../Doctrine/Mapping'));
+        $xmlDriver = new Doctrine\ORM\Mapping\Driver\XmlDriver(
+            realpath(__DIR__ . '/../../../DomainModel/Doctrine/Mapping')
+        );
         $this->config->setMetadataDriverImpl($xmlDriver);
-        $this->config->addEntityNamespace('Entity', 'Jmondi\Gut\DomainModel\Entity');
+        $this->config->addEntityNamespace('DomainModel', 'Jmondi\Gut\DomainModel');
 
         if ($cacheDriver !== null) {
             $this->cacheDriver = $cacheDriver;

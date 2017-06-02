@@ -9,6 +9,11 @@ trait UuidEntityTrait
     /** @var string */
     private $id;
 
+    public function getUuid(): UuidInterface
+    {
+        return Uuid::fromString($this->id);
+    }
+
     protected function setId(?string $id = null)
     {
         if ($id === null) {
@@ -16,10 +21,5 @@ trait UuidEntityTrait
         }
 
         $this->id = $id;
-    }
-
-    protected function getUuid(): UuidInterface
-    {
-        return Uuid::fromString($this->id);
     }
 }

@@ -2,7 +2,6 @@
 namespace Jmondi\Gut\DomainModel\OAuth;
 
 use DateTime;
-use Jmondi\Gut\DomainModel\Doctrine\EntityInterface;
 use Jmondi\Gut\DomainModel\Doctrine\StringEntityInterface;
 use Jmondi\Gut\DomainModel\Entity\DateTime\CreatedAtTrait;
 use Jmondi\Gut\DomainModel\Entity\Id\IdentifierTrait;
@@ -20,7 +19,7 @@ class OAuthRefreshToken implements StringEntityInterface
     /** @var DateTime */
     private $expiresAt;
     /** @var OAuthAccessToken */
-    private $oauthAccessToken;
+    private $oAuthAccessToken;
     /** @var bool */
     private $isRevoked;
 
@@ -50,13 +49,13 @@ class OAuthRefreshToken implements StringEntityInterface
         return $this->identifier;
     }
 
-    public function setOAuthAccessToken(OAuthAccessToken $oauthAccessToken)
-    {
-        $this->oauthAccessToken = $oauthAccessToken;
-    }
-
     public function getOAuthAccessToken(): OAuthAccessToken
     {
-        return $this->oauthAccessToken;
+        return $this->oAuthAccessToken;
+    }
+
+    public function setOAuthAccessToken(OAuthAccessToken $oAuthAccessToken)
+    {
+        $this->oAuthAccessToken = $oAuthAccessToken;
     }
 }

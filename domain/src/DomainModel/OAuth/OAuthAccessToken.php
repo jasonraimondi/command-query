@@ -1,10 +1,8 @@
 <?php
-
 namespace Jmondi\Gut\DomainModel\OAuth;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Jmondi\Gut\DomainModel\Doctrine\EntityInterface;
 use Jmondi\Gut\DomainModel\Doctrine\StringEntityInterface;
 use Jmondi\Gut\DomainModel\Entity\DateTime\CreatedAtTrait;
 use Jmondi\Gut\DomainModel\Entity\Id\IdentifierTrait;
@@ -23,13 +21,13 @@ class OAuthAccessToken implements StringEntityInterface
     /** @var User */
     private $user;
     /** @var OAuthClient */
-    private $oauthClient;
+    private $oAuthClient;
     /** @var OAuthScope[] */
     private $oAuthScopes;
 
     public function __construct(
         User $user,
-        OAuthClient $oauthClient,
+        OAuthClient $oAuthClient,
         ?string $identifier = null
     ) {
         $this->setIdentifierToken($identifier);
@@ -38,7 +36,7 @@ class OAuthAccessToken implements StringEntityInterface
         $this->isRevoked = false;
         $this->expiresAt = new DateTime(self::EXPIRES_AT_DATETIME_STRING);
         $this->user = $user;
-        $this->oauthClient = $oauthClient;
+        $this->oAuthClient = $oAuthClient;
     }
 
     public function getId(): string
@@ -58,12 +56,12 @@ class OAuthAccessToken implements StringEntityInterface
 
     public function getOAuthClient()
     {
-        return $this->oauthClient;
+        return $this->oAuthClient;
     }
 
     public function setOAuthClient(OAuthClient $client)
     {
-        $this->oauthClient = $client;
+        $this->oAuthClient = $client;
     }
 
     public function addOAuthScope(OAuthScope $oAuthScope)

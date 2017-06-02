@@ -17,8 +17,6 @@ class OAuthClient implements StringEntityInterface
     private $name;
     /** @var string[] */
     private $redirectUrls;
-    /** @var OAuthAccessToken[] */
-    private $oauthAccessTokens;
 
     public function __construct(
         string $name,
@@ -27,13 +25,13 @@ class OAuthClient implements StringEntityInterface
         $this->setCreatedAt();
         $this->setIdentifierToken($identifier);
         $this->name = $name;
-        $this->oauthAccessTokens = new ArrayCollection();
+        $this->oAuthAccessTokens = new ArrayCollection();
         $this->redirectUrls = new ArrayCollection();
     }
 
     public function addOAuthAccessToken(OAuthAccessToken $accessToken)
     {
-        $this->oauthAccessTokens->add($accessToken);
+        $this->oAuthAccessTokens->add($accessToken);
     }
 
     public function jsonSerialize()

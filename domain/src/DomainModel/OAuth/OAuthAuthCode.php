@@ -19,7 +19,7 @@ class OAuthAuthCode implements StringEntityInterface
     /** @var User */
     private $user;
     /** @var OAuthClient */
-    private $oauthClient;
+    private $oAuthClient;
     /** @var string */
     private $identifier;
     /** @var string[] */
@@ -31,7 +31,7 @@ class OAuthAuthCode implements StringEntityInterface
 
     public function __construct(
         User $user,
-        OAuthClient $oauthClient,
+        OAuthClient $oAuthClient,
         ?string $identifier = null
     ) {
         $this->setIdentifierToken($identifier);
@@ -83,12 +83,12 @@ class OAuthAuthCode implements StringEntityInterface
 
     public function getOAuthClient(): OAuthClient
     {
-        return $this->oauthClient;
+        return $this->oAuthClient;
     }
 
     public function setOAuthClient(OAuthClient $client)
     {
-        $this->oauthClient = $client;
+        $this->oAuthClient = $client;
     }
 
     public function addOAuthScope(OAuthScope $scope)

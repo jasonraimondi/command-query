@@ -9,15 +9,6 @@
         <field name="name" type="string"/>
         <field name="redirectUrls" type="array" nullable="true"/>
         <field name="createdAt" type="datetime"/>
-
-        <one-to-many field="oAuthAccessTokens" target-entity="Jmondi\Gut\DomainModel\OAuth\OAuthAccessToken" mapped-by="oAuthCLient">
-            <cascade>
-                <cascade-persist/>
-            </cascade>
-            <order-by>
-                <order-by-field name="createdAt" direction="DESC" />
-            </order-by>
-        </one-to-many>
     </entity>
 
 </doctrine-mapping>
