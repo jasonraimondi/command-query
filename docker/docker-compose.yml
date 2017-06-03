@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+  php:
+    build: ./php
+    ports:
+      - "9000:9000"
+    env_file: ./.env
+    volumes:
+     - ../../logs/php:/var/log
+     - ../../api:/var/www/html
+     - ../../domain:/var/www/domain
+     - ../../templates:/var/www/templates
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "8084:80"
+    volumes:
+     - ../../logs/nginx/nginx:/var/log/nginx
+     - ../../logs/nginx:/var/log
+     - ../../api:/var/www/html
+
+  mysql:
+    build: ./mysql
+    ports:
+     - "33066:3306"
+    env_file: ./.env
+    volumes:
+     - ../../logs/mysql:/var/log
+     - ../../data/database:/var/lib/mysql
+     - ../../backups/database:/backups
