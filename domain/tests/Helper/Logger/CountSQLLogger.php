@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Test;
+namespace Jmondi\Gut\Test\Helper\Logger;
 
 use Doctrine\DBAL\Logging\SQLLogger;
 use Jmondi\Gut\DomainModel\Entity\Uuid\Uuid;

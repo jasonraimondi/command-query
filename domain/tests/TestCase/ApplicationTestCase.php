@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Test;
+namespace Jmondi\Gut\Test\TestCase;
 
 use Jmondi\Gut\DomainModel\Doctrine\EntityInterface;
 

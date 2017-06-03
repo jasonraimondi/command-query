@@ -1,13 +1,15 @@
 <?php
-namespace Jmondi\Gut\Test;
+namespace Jmondi\Gut\Test\TestCase;
 
 use Doctrine;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\EntityManager;
 use Jmondi\Gut\Infrastructure\App\DoctrineHelper;
 use Jmondi\Gut\Infrastructure\Repository\RepositoryFactory;
+use Jmondi\Gut\Infrastructure\Service\ServiceFactory;
+use Jmondi\Gut\Test\Helper\Logger\CountSQLLogger;
 
-abstract class EntityRepositoryTestCaseCase extends ApplicationTestCase
+abstract class RepositoryTestCase extends ApplicationTestCase
 {
     /** @var EntityManager */
     protected $entityManager;
@@ -88,6 +90,13 @@ abstract class EntityRepositoryTestCaseCase extends ApplicationTestCase
     protected function getRepositoryFactory()
     {
         return new RepositoryFactory($this->entityManager);
+    }
+
+    protected function getServiceFactory(): ServiceFactory
+    {
+        return new ServiceFactory(
+            $this->getRepositoryFactory()
+        );
     }
 
     private function setupTestSchema()
