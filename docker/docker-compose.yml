@@ -7,19 +7,28 @@ services:
       - "9000:9000"
     env_file: ./.env
     volumes:
-     - ../../logs/php:/var/log
-     - ../../api:/var/www/html
-     - ../../domain:/var/www/domain
-     - ../../templates:/var/www/templates
+     - ../logs/php:/var/log
+     - ../lumen-api:/var/www/html
+     - ../domain:/var/www/domain
+     - ../templates:/var/www/templates
 
-  nginx:
-    build: ./nginx
+  nginx-api:
+    build: ./nginx-api
     ports:
-      - "8084:80"
+      - "8010:80"
     volumes:
-     - ../../logs/nginx/nginx:/var/log/nginx
-     - ../../logs/nginx:/var/log
-     - ../../api:/var/www/html
+     - ../logs/nginx/nginx-api:/var/log/nginx
+     - ../logs/nginx-api:/var/log
+     - ../lumen-api:/var/www/html
+
+  nginx-frontend:
+    build: ./nginx-frontend
+    ports:
+      - "8011:80"
+    volumes:
+     - ../logs/nginx/nginx-frontend:/var/log/nginx
+     - ../logs/nginx-frontend:/var/log
+     - ../frontend:/var/www/html
 
   mysql:
     build: ./mysql
@@ -27,6 +36,6 @@ services:
      - "33066:3306"
     env_file: ./.env
     volumes:
-     - ../../logs/mysql:/var/log
-     - ../../data/database:/var/lib/mysql
-     - ../../backups/database:/backups
+     - ../logs/mysql:/var/log
+     - ../data/database:/var/lib/mysql
+     - ../backups/database:/backups
