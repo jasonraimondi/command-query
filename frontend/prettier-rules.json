@@ -1,0 +1,12 @@
+{
+  "printWidth": 120,
+  "tabWidth": 4,
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "parser": "babylon",
+  "encoding": "utf-8",
+  "extensions": [
+    ".ts"
+  ]
+}
