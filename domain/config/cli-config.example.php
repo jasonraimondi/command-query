@@ -7,12 +7,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $doctrineHelper = new DoctrineHelper(new Doctrine\Common\Cache\ArrayCache());
 $doctrineHelper->setup([
     'driver' => 'pdo_mysql',
-    'dbname' => 'test',
-    'user' => 'root',
-    'password' => 'rooty',
-    'host' => '127.0.0.1',
-    'port' => '4409',
-    'charset' => 'utf8',
+    'dbname' => getenv('MYSQL_DATABASE') ?: 'jmondi',
+    'user' => getenv('MYSQL_USER') ?: 'user',
+    'password' => getenv('MYSQL_PASSWORD') ?: 'secret',
+    'host' => getenv('MYSQL_HOST') ?: 'mysql',
+    'port' => getenv('MYSQL_PORT') ?: '3306',
+    'charset' => 'utf8mb4',
 ]);
 
 $entityManager = $doctrineHelper->getEntityManager();
