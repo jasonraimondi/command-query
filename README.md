@@ -8,6 +8,7 @@ Access the [Makefile here](./Makefile)
     * Percona
     * Nginx - API
     * Nginx - Frontend
+    * Nginx - Auth
     * PHP 7.1
 * [Domain Business Logic](./domain)
     * Action
@@ -15,7 +16,9 @@ Access the [Makefile here](./Makefile)
     * DomainModel
     * Infrastructure
 * [Lumen API](./lumen-api)
+* [Lumen OAuth2 Portal](./lumen-api)
 * [Angular SPA Frontend](./frontend)
     * Implicit Login
 * [API Client Libraries](./api-client-libraries)
     * [Typescript](./api-client-libraries/typescript)
+    
