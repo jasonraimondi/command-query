@@ -18,7 +18,7 @@ module.exports = merge(baseWebpackConfig, {
     stats: 'minimal'
   },
   plugins: [
-    // new PrettierPlugin(prettierRules),
+    new PrettierPlugin(prettierRules),
     new webpack.DefinePlugin({
       __IN_DEBUG__: JSON.stringify(true)
     }),
