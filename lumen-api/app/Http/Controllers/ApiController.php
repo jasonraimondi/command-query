@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace Jmondi\Api\Http\Controllers;
 
 class ApiController extends Controller
 {

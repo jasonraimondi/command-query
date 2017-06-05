@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fff2394acc054796e39ea4486a2350a8",
+    "content-hash": "ab593c8afc8947406813ebc56b225173",
     "packages": [
         {
             "name": "composer/installers",
@@ -1783,7 +1783,7 @@
         },
         {
             "name": "jmondi/domain",
-            "version": "dev-master",
+            "version": "dev-lumen-auth",
             "dist": {
                 "type": "path",
                 "url": "../domain",

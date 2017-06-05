@@ -1,6 +1,6 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
+    "name": "jmondi/api",
+    "description": "Jmondi Api Project.",
     "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
     "type": "project",
@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "jmondi/domain": "dev-master",
+        "jmondi/domain": "dev-lumen-auth",
         "laravel/lumen-framework": "5.4.*",
         "vlucas/phpdotenv": "~2.2"
     },
@@ -23,18 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "Jmondi\\Api\\": "app/"
         }
     },
     "autoload-dev": {
         "classmap": [
-            "tests/",
-            "database/"
-        ]
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "tests/"
         ]
     },
     "minimum-stability": "dev",

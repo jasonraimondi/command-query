@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Jmondi\Auth\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;

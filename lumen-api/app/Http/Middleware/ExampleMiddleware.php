@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Jmondi\Api\Http\Middleware;
 
 use Closure;
 

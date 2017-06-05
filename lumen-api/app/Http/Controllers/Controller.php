@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace Jmondi\Api\Http\Controllers;
 
 use Jmondi\Gut\Infrastructure\Lib\ApplicationCore;
 use Laravel\Lumen\Routing\Controller as BaseController;
