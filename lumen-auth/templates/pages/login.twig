@@ -1,0 +1,22 @@
+{% extends '@authProject/layouts/default.twig' %}
+
+{% block content %}
+
+    <div>
+        <form action="/postImplicit?response_type={{ responseType }}&client_id={{ clientId }}&redirect_uri={{ redirectUri }}" method="post">
+
+            <label>
+                Email
+                <input type="email" name="email" required>
+            </label>
+
+            <label>
+                Password
+                <input type="password" name="password" required>
+            </label>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}
