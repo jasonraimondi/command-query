@@ -3,7 +3,7 @@ const merge = require('webpack-merge');
 const path = require('path');
 
 const PrettierPlugin = require('prettier-webpack-plugin');
-const prettierRules = require('./prettier-rules.json');
+const prettierRules = require('./prettier.rules.json');
 
 const baseWebpackConfig = require('./webpack.base');
 

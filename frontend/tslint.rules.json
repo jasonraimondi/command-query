@@ -4,7 +4,7 @@
     "array-type": [true, "array"],
     "ban-types": [true, ["Object", "Use {} instead."], ["String"]],
     "eofline": true,
-    "indent": [true, "spaces", 4],
+    "indent": [true, "spaces", 2],
     "max-line-length": [true, 120],
     "member-ordering": [
       true,
@@ -28,7 +28,7 @@
     "no-empty-interface": true,
     "no-irregular-whitespace": true,
     "no-string-literal": true,
-    "quotemark": [true, "single", "avoid-escape"],
+    "quotemark": [true, "double", "avoid-escape"],
     "semicolon": [true, "always"]
   }
 }
