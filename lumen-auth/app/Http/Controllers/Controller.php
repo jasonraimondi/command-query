@@ -1,6 +1,7 @@
 <?php
 namespace Jmondi\Auth\Http\Controllers;
 
+use Jmondi\Gut\Infrastructure\Lib\ApplicationCore;
 use Jmondi\Gut\Infrastructure\Template\AuthTemplateGenerator;
 use Jmondi\Gut\Infrastructure\Template\Twig\TemplateNamespace;
 use Jmondi\Gut\Infrastructure\Template\Twig\TwigTemplateGenerator;
@@ -13,6 +14,8 @@ class Controller extends BaseController
 
     public function __construct()
     {
+
+        dd(true);
         $twigTemplateGenerator = TwigTemplateGenerator::createFromTemplateNamespace(
             new TemplateNamespace(
                 realpath(__DIR__ . '/../../../..') . '/templates/base',
@@ -25,8 +28,12 @@ class Controller extends BaseController
 
     protected function renderView(string $page, array $parameters)
     {
-
         return $this->templateGenerator->renderView($page, $parameters);
+    }
+
+    protected function getApplicationCore(): ApplicationCore
+    {
+        return app(ApplicationCore::class);
     }
 }
 

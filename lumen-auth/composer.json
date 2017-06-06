@@ -14,7 +14,9 @@
         "php": ">=7.1.0",
         "jmondi/domain": "dev-lumen-auth",
         "laravel/lumen-framework": "5.4.*",
-        "vlucas/phpdotenv": "~2.2"
+        "vlucas/phpdotenv": "~2.2",
+        "symfony/psr-http-message-bridge": "^1.0",
+        "zendframework/zend-diactoros": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -88,7 +88,7 @@ $app->singleton(
 |
 */
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+$app->group(['namespace' => 'Jmondi\Api\Http\Controllers'], function ($app) {
     require __DIR__ . '/../routes/web.php';
 });
 

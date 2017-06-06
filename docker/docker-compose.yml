@@ -1,33 +1,6 @@
 version: '2'
 services:
 
-  php:
-    build: ./php
-    ports:
-      - "9000:9000"
-    env_file: ./.env
-    volumes:
-     - ../logs/php:/var/log
-     - ../lumen-api:/var/www/html
-     - ../domain:/var/www/domain
-     - ../templates:/var/www/templates
-
-  nginx-api:
-    build: ./nginx-api
-    ports:
-      - "8010:80"
-    volumes:
-     - ../logs/nginx-api:/var/log
-     - ../lumen-api:/var/www/html
-
-  nginx-frontend:
-    build: ./nginx-frontend
-    ports:
-      - "8011:80"
-    volumes:
-     - ../logs/nginx-frontend:/var/log
-     - ../frontend:/var/www/html
-
   mysql:
     build: ./mysql
     ports:
@@ -37,3 +10,39 @@ services:
      - ../logs/mysql:/var/log
      - ../data/database:/var/lib/mysql
      - ../backups/database:/backups
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "8010:80"
+      - "8011:81"
+      - "8012:82"
+    volumes:
+     - ../logs/nginx:/var/log
+     - ../api-client-libraries:/var/www/api-client-libraries
+     - ../domain:/var/www/domain
+     - ../frontend:/var/www/frontend
+     - ../lumen-api:/var/www/lumen-api
+     - ../lumen-auth:/var/www/lumen-auth
+     - ../templates:/var/www/templates
+
+  php-api:
+    build: ./php-api
+    ports:
+      - "9000:9000"
+    env_file: ./.env
+    volumes:
+     - ../logs/php:/var/log
+     - ../domain:/var/www/domain
+     - ../lumen-api:/var/www/lumen-api
+
+  php-auth:
+    build: ./php-auth
+    ports:
+      - "9001:9000"
+    env_file: ./.env
+    volumes:
+     - ../logs/php:/var/log
+     - ../domain:/var/www/domain
+     - ../lumen-auth:/var/www/lumen-auth
+     - ../templates:/var/www/templates

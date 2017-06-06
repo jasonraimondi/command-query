@@ -1,5 +1,9 @@
 <?php
 
+var_dump('hello');
+
+die();
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 //try {
@@ -88,7 +92,7 @@ $app->singleton(
 |
 */
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+$app->group(['namespace' => 'Jmondi\Auth\Http\Controllers'], function ($app) {
     require __DIR__ . '/../routes/web.php';
 });
 
