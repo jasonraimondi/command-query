@@ -4,7 +4,9 @@
     <option name="pluginEnabled" value="true" />
     <option name="twigNamespaces">
       <list>
-        <twig_namespace custom="true" namespace="typescript" namespaceType="ADD_PATH" path="templates/api-client-libraries/typescript" />
+        <twig_namespace custom="true" namespace="frontend" namespaceType="ADD_PATH" path="domain/templates/frontend" />
+        <twig_namespace custom="true" namespace="auth" namespaceType="ADD_PATH" path="domain/templates/auth" />
+        <twig_namespace custom="true" namespace="client-libs" namespaceType="ADD_PATH" path="domain/templates/client-libs" />
       </list>
     </option>
   </component>
