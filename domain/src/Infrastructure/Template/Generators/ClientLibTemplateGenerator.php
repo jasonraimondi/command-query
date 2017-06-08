@@ -7,6 +7,6 @@ final class ClientLibTemplateGenerator extends AbstractTemplateGenerator
 {
     public function __construct(string $clientLibrary)
     {
-        parent::__construct(TemplateNamespace::clientLibs()->getNamespace() . '/' . $clientLibrary);
+        parent::__construct(TemplateNamespace::clientLibs());
     }
 }

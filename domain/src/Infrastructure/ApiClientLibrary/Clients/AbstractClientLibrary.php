@@ -33,7 +33,7 @@ abstract class AbstractClientLibrary
     protected function render(string $templateName, array $parameters, string $outputFilePath, string $outputFileName): void
     {
         $twigContent = $this->getTemplateGenerator()->renderView(
-            $templateName,
+            $this->name . '/' . $templateName,
             $parameters
         );
 

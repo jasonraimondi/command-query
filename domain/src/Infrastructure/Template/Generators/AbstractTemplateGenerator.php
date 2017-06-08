@@ -2,18 +2,19 @@
 namespace Jmondi\Gut\Infrastructure\Template\Generators;
 
 use Jmondi\Gut\Infrastructure\Template\Exceptions\TemplateGeneratorException;
+use Jmondi\Gut\Infrastructure\Template\Twig\TemplateNamespace;
 use Jmondi\Gut\Infrastructure\Template\Twig\TwigTemplateGenerator;
 use Twig_Environment;
 use Twig_Error_Loader;
 
 abstract class AbstractTemplateGenerator
 {
-    /** @var string */
+    /** @var TemplateNamespace */
     protected $templateNamespace;
     /** @var Twig_Environment */
     protected $twigEnvironment;
 
-    public function __construct(string $templateNamespace)
+    public function __construct(TemplateNamespace $templateNamespace)
     {
         $this->templateNamespace = $templateNamespace;
         $this->twigEnvironment = TwigTemplateGenerator::createTemplateGenerator()->getTwigEnvironment();
@@ -34,6 +35,6 @@ abstract class AbstractTemplateGenerator
 
     private function getTemplateFile(string $templateName): string
     {
-        return '@' . $this->templateNamespace . '/' . $templateName . '.twig';
+        return '@' . $this->templateNamespace->getNamespace() . '/' . $templateName . '.twig';
     }
 }
