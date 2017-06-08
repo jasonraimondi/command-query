@@ -2,9 +2,7 @@
 namespace Jmondi\Auth\Http\Controllers;
 
 use Jmondi\Gut\Infrastructure\Lib\ApplicationCore;
-use Jmondi\Gut\Infrastructure\Template\AuthTemplateGenerator;
-use Jmondi\Gut\Infrastructure\Template\Twig\TemplateNamespace;
-use Jmondi\Gut\Infrastructure\Template\Twig\TwigTemplateGenerator;
+use Jmondi\Gut\Infrastructure\Template\Generators\AuthTemplateGenerator;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -14,19 +12,10 @@ class Controller extends BaseController
 
     public function __construct()
     {
-
-        dd(true);
-        $twigTemplateGenerator = TwigTemplateGenerator::createFromTemplateNamespace(
-            new TemplateNamespace(
-                realpath(__DIR__ . '/../../../..') . '/templates/base',
-                'auth'
-            )
-        );
-
-        $this->templateGenerator = new AuthTemplateGenerator($twigTemplateGenerator->getTwigEnvironment());
+        $this->templateGenerator = new AuthTemplateGenerator();
     }
 
-    protected function renderView(string $page, array $parameters)
+    protected function renderView(string $page, array $parameters = [])
     {
         return $this->templateGenerator->renderView($page, $parameters);
     }

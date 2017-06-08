@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Template\Twig;
 
-use Jmondi\Gut\Infrastructure\Template\MarkdownParser;
+use Jmondi\Gut\Infrastructure\Template\LeagueCommonMark\MarkdownParser;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
@@ -34,21 +34,26 @@ class TwigTemplateGenerator
         );
     }
 
-    public static function createFromTemplateNamespace(TemplateNamespace $templateNamespace)
-    {
-        return new self([$templateNamespace]);
-    }
-
-    public function getTwigEnvironment()
-    {
-        return $this->twigEnvironment;
-    }
-
     private function addTwigTemplatePath(TemplateNamespace $templateNamespace)
     {
         $this->twigLoader->addPath(
             $templateNamespace->getTemplatesPath(),
             $templateNamespace->getNamespace()
         );
+
+
+    }
+
+    public static function createTemplateGenerator()
+    {
+        return new self([
+            TemplateNamespace::auth(),
+            TemplateNamespace::clientLibs(),
+        ]);
+    }
+
+    public function getTwigEnvironment()
+    {
+        return $this->twigEnvironment;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Template\Twig;
 
-use Jmondi\Gut\Infrastructure\Template\MarkdownParserInterface;
+use Jmondi\Gut\Infrastructure\Template\LeagueCommonMark\MarkdownParserInterface;
 
 class TwigMarkdownExtension extends \Twig_Extension
 {

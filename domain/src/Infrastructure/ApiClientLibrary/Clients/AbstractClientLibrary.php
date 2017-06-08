@@ -2,14 +2,12 @@
 namespace Jmondi\Gut\Infrastructure\ApiClientLibrary\Clients;
 
 use Jmondi\Gut\Infrastructure\Describer\DomainDescriber;
-use Jmondi\Gut\Infrastructure\Template\SDKTemplateGenerator;
+use Jmondi\Gut\Infrastructure\Template\Generators\ClientLibTemplateGenerator;
 use Jmondi\Gut\Infrastructure\Template\Twig\TemplateNamespace;
 use Jmondi\Gut\Infrastructure\Template\Twig\TwigTemplateGenerator;
 
 abstract class AbstractClientLibrary
 {
-    /** @var string */
-    protected $templatePath;
     /** @var string */
     protected $outputPath;
     /** @var string */
@@ -18,7 +16,7 @@ abstract class AbstractClientLibrary
     protected $extension;
     /** @var DomainDescriber */
     protected $apiDescriber;
-    /** @var SDKTemplateGenerator */
+    /** @var ClientLibTemplateGenerator */
     protected $sdkTemplateGenerator;
 
     abstract public static function createNewClient();
@@ -26,11 +24,8 @@ abstract class AbstractClientLibrary
 
     protected function __construct(string $extension, string $clientLibraryName, string $pathInClientLibrary = '')
     {
-        $projectRootDir = realpath(__DIR__ . '/../../../../');
-
         $this->name = $clientLibraryName;
-        $this->templatePath = $projectRootDir . '/api-client-libraries/_templates/' . $this->name;
-        $this->outputPath = $projectRootDir . 'api-client-libraries/' . $this->name . '/' . $pathInClientLibrary . '/';
+        $this->outputPath = realpath(__DIR__ . '/../../../../../') . '/api-client-libraries/' . $this->name . '/' . $pathInClientLibrary . '/';
         $this->extension = $extension;
         $this->apiDescriber = new DomainDescriber();
     }
@@ -38,43 +33,33 @@ abstract class AbstractClientLibrary
     protected function render(string $templateName, array $parameters, string $outputFilePath, string $outputFileName): void
     {
         $twigContent = $this->getTemplateGenerator()->renderView(
-            $this->name,
             $templateName,
             $parameters
         );
 
-        $fullOutput = $this->outputPath . '/' . $outputFilePath;
+        $fullPath = $this->outputPath . $outputFilePath;
+        $fullOutputFileWithPath = $fullPath . '/' . $outputFileName . '.' . $this->extension;
 
-        if (!file_exists($fullOutput)) {
-            mkdir($fullOutput, 0775, true);
+        if (!file_exists($fullPath)) {
+            mkdir($fullPath, 0775, true);
         }
 
-        file_put_contents($fullOutput . '/' . $outputFileName . '.' . $this->extension, $twigContent);
+        file_put_contents($fullOutputFileWithPath, $twigContent);
     }
 
-    protected function getTemplateGenerator(): SDKTemplateGenerator
+    protected function getTemplateGenerator(): ClientLibTemplateGenerator
     {
-        if ($this->sdkTemplateGenerator === null) {
-            $twigTemplateGenerator = TwigTemplateGenerator::createFromTemplateNamespace(
-                new TemplateNamespace(
-                    $this->templatePath,
-                    $this->name
-                )
-            );
-
-            $this->sdkTemplateGenerator = new SDKTemplateGenerator(
-                $twigTemplateGenerator->getTwigEnvironment()
-            );
-        }
-
-        return $this->sdkTemplateGenerator;
+        return new ClientLibTemplateGenerator($this->name);
     }
 
     // https://secure.php.net/manual/en/function.get-class.php#114568
     // we are just grabbing the class name without the full namespace
     protected function getBaseClassName(string $className): string
     {
-        if ($pos = strrpos($className, '\\')) return substr($className, $pos + 1);
+        if ($pos = strrpos($className, '\\')) {
+            return substr($className, $pos + 1);
+        }
+
         return $pos;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template;
+namespace Jmondi\Gut\Infrastructure\Template\LeagueCommonMark;
 
 use League\CommonMark\DocParser;
 use League\CommonMark\Environment;
