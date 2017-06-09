@@ -1,6 +1,8 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Template\Twig;
 
+use Assetic\Extension\Twig\AsseticExtension;
+use Assetic\Factory\AssetFactory;
 use Jmondi\Gut\Infrastructure\Template\LeagueCommonMark\MarkdownParser;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
@@ -12,10 +14,18 @@ class TwigTemplateGenerator
     /** @var Twig_Loader_Filesystem */
     private $twigLoader;
 
+    public static function createTemplateGenerator()
+    {
+        return new self([
+            TemplateNamespace::auth(),
+            TemplateNamespace::clientLibs(),
+        ]);
+    }
+
     /**
      * @param TemplateNamespace[] $twigTemplateNamespaces
      */
-    public function __construct(array $twigTemplateNamespaces)
+    private function __construct(array $twigTemplateNamespaces)
     {
         $this->twigLoader = new Twig_Loader_Filesystem();
 
@@ -42,14 +52,6 @@ class TwigTemplateGenerator
         );
 
 
-    }
-
-    public static function createTemplateGenerator()
-    {
-        return new self([
-            TemplateNamespace::auth(),
-            TemplateNamespace::clientLibs(),
-        ]);
     }
 
     public function getTwigEnvironment()
