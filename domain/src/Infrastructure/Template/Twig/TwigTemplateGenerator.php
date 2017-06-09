@@ -6,6 +6,7 @@ use Assetic\Factory\AssetFactory;
 use Jmondi\Gut\Infrastructure\Template\LeagueCommonMark\MarkdownParser;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
+use Twig_SimpleFunction;
 
 class TwigTemplateGenerator
 {
@@ -41,6 +42,20 @@ class TwigTemplateGenerator
 
         $this->twigEnvironment->addExtension(
             new TwigLowercaseFirstExtension()
+        );
+
+        new Twig_SimpleFunction(
+            'assetUrl',
+            function ($theme, $section, $path) {
+                return $this->routeUrl->getRoute(
+                    'asset.serve',
+                    [
+                        'theme' => $theme,
+                        'section' => $section,
+                        'path' => $path,
+                    ]
+                );
+            }
         );
     }
 
