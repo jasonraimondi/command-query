@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "jmondi/domain": "dev-lumen-auth",
+        "jmondi/domain": "dev-dev",
         "laravel/lumen-framework": "5.4.*",
         "vlucas/phpdotenv": "~2.2",
         "symfony/psr-http-message-bridge": "^1.0",
