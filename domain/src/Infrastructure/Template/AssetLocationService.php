@@ -1,17 +1,23 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template\Twig;
+namespace Jmondi\Gut\Infrastructure\Template;
 
 class AssetLocationService
 {
-    public function getAssetFilePathByTheme($theme, $path)
+    public function getTemplateAssetFilepath(string $templateNamespace, string $path)
     {
-        $kommerceTemplatesPath = realpath(__DIR__ . '/../..');
-        if ($theme == 'base-theme') {
-            $basePath = $kommerceTemplatesPath . '/base-theme/assets/' . $path;
-            if (file_exists($basePath)) {
-                return $basePath;
-            }
+        $templateNamespace = urldecode($templateNamespace);
+        $path = urldecode($path);
+
+        if ($templateNamespace[0] === '@') {
+            $templateNamespace = $this->removeAtSymbol($templateNamespace);
         }
-        return $kommerceTemplatesPath . '/themes/' . $theme . '/assets/' . $path;
+
+        $baseTemplatesPath = realpath(__DIR__ . '/../../../') . '/templates/';
+        return $baseTemplatesPath . $templateNamespace . '/assets/' . $path;
+    }
+
+    private function removeAtSymbol(string $templateNamespace)
+    {
+        return substr($templateNamespace, 1);
     }
 }

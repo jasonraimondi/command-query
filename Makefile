@@ -21,7 +21,10 @@ create-schema:
 update-schema:
 	cd domain; vendor/bin/doctrine orm:schema-tool:update --dump-sql
 
+composer-install:
+	cd domain; composer install; cd ../lumen-api; composer install; cd ../lumen-auth; composer install
+
 composer-update:
 	cd domain; composer update; cd ../lumen-api; composer update; cd ../lumen-auth; composer update
 
-.PHONY: validate create-schema update-schema
+.PHONY: validate create-schema update-schema composer-install composer-update

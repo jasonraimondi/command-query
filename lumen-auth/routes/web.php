@@ -1,4 +1,11 @@
 <?php
 
-$app->get('/', 'ImplicitController@index');
+$app->get('/', [
+    'as' => 'home',
+    'uses' => 'ImplicitController@index'
+]);
 
+$app->get('/assets/{templateNamespace}/{path}', [
+    'as' => 'asset.serve',
+    'uses' => 'AssetController@serve'
+]);

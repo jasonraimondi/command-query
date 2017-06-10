@@ -1,9 +1,11 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template\Twig;
+namespace Jmondi\Gut\Infrastructure\Template\Twig\Extension;
 
 use Jmondi\Gut\Infrastructure\Template\LeagueCommonMark\MarkdownParserInterface;
+use Twig_Extension;
+use Twig_SimpleFilter;
 
-class TwigMarkdownExtension extends \Twig_Extension
+class TwigMarkdownExtension extends Twig_Extension
 {
     private $markdownParser;
 
@@ -12,26 +14,24 @@ class TwigMarkdownExtension extends \Twig_Extension
         $this->markdownParser = $markdownParser;
     }
 
+    public function getName(): string
+    {
+        return 'markdownRender';
+    }
+
     public function getFilters(): array
     {
-        $markdownFilter = new \Twig_SimpleFilter(
-            'markdown',
-            [$this, 'markdownRender'],
-            ['is_safe' => ['html']]
-        );
-
         return [
-            'markdown' => $markdownFilter,
+            new Twig_SimpleFilter(
+                'markdown',
+                [$this, 'markdownRender'],
+                ['is_safe' => ['html']]
+            )
         ];
     }
 
     public function markdownRender(string $markdownString): string
     {
         return $this->markdownParser->render($markdownString);
-    }
-
-    public function getName(): string
-    {
-        return 'markdownRender';
     }
 }

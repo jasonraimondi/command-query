@@ -3,6 +3,7 @@ namespace Jmondi\Auth\Http\Controllers;
 
 use Jmondi\Gut\Infrastructure\Lib\ApplicationCore;
 use Jmondi\Gut\Infrastructure\Template\Generators\AuthTemplateGenerator;
+use Jmondi\Gut\Infrastructure\Template\LaravelRouteUrl;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -12,7 +13,9 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->templateGenerator = new AuthTemplateGenerator();
+        $this->templateGenerator = new AuthTemplateGenerator(
+            new LaravelRouteUrl()
+        );
     }
 
     protected function renderView(string $page, array $parameters = [])

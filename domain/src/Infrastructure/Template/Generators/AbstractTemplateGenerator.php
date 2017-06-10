@@ -2,6 +2,7 @@
 namespace Jmondi\Gut\Infrastructure\Template\Generators;
 
 use Jmondi\Gut\Infrastructure\Template\Exceptions\TemplateGeneratorException;
+use Jmondi\Gut\Infrastructure\Template\RouteUrlInterface;
 use Jmondi\Gut\Infrastructure\Template\Twig\TemplateNamespace;
 use Jmondi\Gut\Infrastructure\Template\Twig\TwigTemplateGenerator;
 use Twig_Environment;
@@ -14,10 +15,10 @@ abstract class AbstractTemplateGenerator
     /** @var Twig_Environment */
     protected $twigEnvironment;
 
-    public function __construct(TemplateNamespace $templateNamespace)
+    public function __construct(TemplateNamespace $templateNamespace, RouteUrlInterface $routeUrl)
     {
         $this->templateNamespace = $templateNamespace;
-        $this->twigEnvironment = TwigTemplateGenerator::createTemplateGenerator()->getTwigEnvironment();
+        $this->twigEnvironment = TwigTemplateGenerator::createTemplateGenerator($routeUrl)->getTwigEnvironment();
     }
 
     public function renderView(string $templateName, array $parameters = []): string
