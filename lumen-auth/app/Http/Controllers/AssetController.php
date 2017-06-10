@@ -34,7 +34,7 @@ class AssetController extends Controller
 
     protected function getMimeType(string $file): string
     {
-        $mime_types = [
+        $mimeTypes = [
             "pdf" => "application/pdf",
             "zip" => "application/zip",
             "docx" => "application/msword",
@@ -62,12 +62,11 @@ class AssetController extends Controller
         ];
         $variable = explode('.', $file);
         $extension = strtolower(end($variable));
-        return $mime_types[$extension];
+        return $mimeTypes[$extension];
     }
 
-    protected function getAssetLocationService()
+    protected function getAssetLocationService(): AssetLocationService
     {
-        $assetLocationService = new AssetLocationService();
-        return $assetLocationService;
+        return new AssetLocationService();
     }
 }
