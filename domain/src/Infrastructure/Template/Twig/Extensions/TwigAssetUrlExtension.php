@@ -1,6 +1,7 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template\Twig\Extension;
+namespace Jmondi\Gut\Infrastructure\Template\Twig\Extensions;
 
+use Jmondi\Gut\Infrastructure\Template\Exceptions\TemplateAssetException;
 use Jmondi\Gut\Infrastructure\Template\RouteUrlInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -43,15 +44,5 @@ class TwigAssetUrlExtension extends Twig_Extension
                 'path' => urlencode($path),
             ]
         );
-    }
-
-    /**
-     * @param string $templateNamespace
-     * @return bool|string
-     */
-    private function removeAtSymbol(string $templateNamespace)
-    {
-        $templateNamespace = substr($templateNamespace, 1);
-        return $templateNamespace;
     }
 }

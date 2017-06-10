@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template\Twig\Extension;
+namespace Jmondi\Gut\Infrastructure\Template\Twig\Extensions;
 
 use Jmondi\Gut\Infrastructure\Template\LeagueCommonMark\MarkdownParserInterface;
 use Twig_Extension;

@@ -15,7 +15,7 @@ class AssetController extends Controller
     /**
      * @param string $filePath
      */
-    protected function serveFile($filePath)
+    private function serveFile($filePath)
     {
         if (!file_exists($filePath)) {
             abort(404);
@@ -32,7 +32,7 @@ class AssetController extends Controller
         exit;
     }
 
-    protected function getMimeType(string $file): string
+    private function getMimeType(string $file): string
     {
         $mimeTypes = [
             "pdf" => "application/pdf",
@@ -65,7 +65,7 @@ class AssetController extends Controller
         return $mimeTypes[$extension];
     }
 
-    protected function getAssetLocationService(): AssetLocationService
+    private function getAssetLocationService(): AssetLocationService
     {
         return new AssetLocationService();
     }

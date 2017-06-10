@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template\Twig\Extension;
+namespace Jmondi\Gut\Infrastructure\Template\Exceptions;
 
 use Jmondi\Gut\DomainModel\Exception\ApplicationException;
 

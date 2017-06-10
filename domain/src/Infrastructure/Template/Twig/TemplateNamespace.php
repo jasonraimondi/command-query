@@ -14,6 +14,13 @@ class TemplateNamespace
         $this->namespace = $namespace;
     }
 
+    public static function base()
+    {
+        $namespace = '_base';
+        $templatesPath = realpath(__DIR__ . '/../../../../templates') . '/' . $namespace;
+        return new self($templatesPath, $namespace);
+    }
+
     public static function auth()
     {
         $namespace = 'auth';
