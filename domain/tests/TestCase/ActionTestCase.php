@@ -10,7 +10,7 @@ use Jmondi\Gut\Infrastructure\Lib\Query\QueryInterface;
 use Jmondi\Gut\Infrastructure\Lib\Query\ResponseInterface;
 use Jmondi\Gut\Test\Helper\AuthorizationContext\AlwaysAuthorizedForTestingAuthorizationContext;
 
-abstract class ActionTestCase extends RepositoryTestCase
+abstract class ActionTestCase extends DummyRepositoryTestCase
 {
     protected function dispatchCommand(CommandInterface $command)
     {
@@ -37,7 +37,6 @@ abstract class ActionTestCase extends RepositoryTestCase
             $this->getServiceFactory()
         );
     }
-
 
     protected function dispatchQuery(QueryInterface $query): ResponseInterface
     {

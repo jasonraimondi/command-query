@@ -4,7 +4,7 @@ namespace Jmondi\Gut\Test\TestCase;
 use Doctrine;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\EntityManager;
-use Jmondi\Gut\Infrastructure\App\DoctrineHelper;
+use Jmondi\Gut\Infrastructure\Lib\Doctrine\DoctrineHelper;
 use Jmondi\Gut\Infrastructure\Repository\RepositoryFactory;
 use Jmondi\Gut\Infrastructure\Service\ServiceFactory;
 use Jmondi\Gut\Test\Helper\Logger\CountSQLLogger;
@@ -59,22 +59,22 @@ abstract class RepositoryTestCase extends ApplicationTestCase
 
     private function setupDatabaseConnection()
     {
-        if (isset($_ENV['DB_NAME'])) {
-            $this->setupMysqlConnection();
-        } else {
+//        if (false) {
+//            $this->setupMysqlConnection();
+//        } else {
             $this->setupSqliteConnection();
-        }
+//        }
     }
 
     private function setupMysqlConnection()
     {
         $this->doctrineHelper->setup([
             'driver' => 'pdo_mysql',
-            'dbname' => $_ENV['MYSQL_NAME'],
-            'user' => $_ENV['MYSQL_USER'],
-            'password' => $_ENV['MYSQL_PASSWORD'],
-            'host' => $_ENV['MYSQL_HOST'],
-            'port' => $_ENV['MYSQL_PORT'],
+            'dbname' => getenv('MYSQL_DATABASE') ?: 'jmondi',
+            'user' => 'root',
+            'password' => getenv('MYSQL_PASSWORD') ?: 'secret',
+            'host' => getenv('MYSQL_HOST') ?: 'mysql',
+            'port' => getenv('MYSQL_PORT') ?: '3306',
             'charset' => 'utf8',
         ]);
     }

@@ -2,8 +2,9 @@
 namespace Jmondi\Gut\Test\TestCase;
 
 use Jmondi\Gut\DomainModel\Doctrine\EntityInterface;
+use PHPUnit\Framework\TestCase;
 
-abstract class ApplicationTestCase extends \PHPUnit_Framework_TestCase
+abstract class ApplicationTestCase extends TestCase
 {
     public function setUp()
     {
