@@ -7,7 +7,7 @@ use Jmondi\Gut\DomainModel\Entity\Uuid\UuidInterface;
 trait UuidEntityTrait
 {
     /** @var string */
-    private $id;
+    protected $id;
 
     public function getUuid(): UuidInterface
     {

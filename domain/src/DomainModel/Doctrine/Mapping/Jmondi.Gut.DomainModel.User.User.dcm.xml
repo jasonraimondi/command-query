@@ -16,8 +16,12 @@
         <id name="id" type="uuid_binary"/>
         <field name="email" type="string"/>
         <field name="password" type="string" nullable="true"/>
-        <field name="createdAt" type="datetime" nullable="false"/>
-        <field name="updatedAt" type="datetime" nullable="true"/>
+        <field name="createdAt" type="integer" nullable="false">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+        <field name="updatedAt" type="integer" nullable="true"/>
 
     </entity>
 

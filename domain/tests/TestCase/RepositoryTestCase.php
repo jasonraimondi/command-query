@@ -59,11 +59,11 @@ abstract class RepositoryTestCase extends ApplicationTestCase
 
     private function setupDatabaseConnection()
     {
-//        if (false) {
-//            $this->setupMysqlConnection();
-//        } else {
+        if (false) {
+            $this->setupMysqlConnection();
+        } else {
             $this->setupSqliteConnection();
-//        }
+        }
     }
 
     private function setupMysqlConnection()

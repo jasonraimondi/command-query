@@ -7,6 +7,7 @@ interface UuidInterface
     public static function fromBytes(string $uuidBytes) : UuidInterface;
     public static function fromString(string $uuidString) : UuidInterface;
     public function toBytes() : string;
+    public function getBytes() : string;
     public function getHex() : string;
     public function toString() : string;
 }

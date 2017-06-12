@@ -7,6 +7,5 @@ class AlwaysAuthorizedForTestingAuthorizationContext implements AuthorizationCon
 {
     public function verifyIsAuthenticated()
     {
-        // TODO: Implement verifyIsAuthenticated() method.
     }
 }

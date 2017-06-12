@@ -4,8 +4,6 @@ namespace Jmondi\Gut\DomainModel\User;
 use Jmondi\Gut\DomainModel\Doctrine\UuidEntityInterface;
 use Jmondi\Gut\DomainModel\Entity\DateTime\DateTimeTrait;
 use Jmondi\Gut\DomainModel\Entity\Id\UuidEntityTrait;
-use Jmondi\Gut\DomainModel\Entity\Uuid\Uuid;
-use Jmondi\Gut\DomainModel\Entity\Uuid\UuidInterface;
 
 class User implements UuidEntityInterface
 {
@@ -14,10 +12,7 @@ class User implements UuidEntityInterface
 
     /** @var string */
     private $email;
-
-    /**
-     * @var null|string
-     */
+    /** @var null|string */
     private $password;
 
     public function __construct(
@@ -29,9 +24,9 @@ class User implements UuidEntityInterface
         $this->email = $email;
     }
 
-    public function getId(): UuidInterface
+    public function getId(): string
     {
-        return Uuid::fromString($this->id);
+        return $this->id;
     }
 
     public function getEmail(): string
