@@ -5,7 +5,7 @@ use Jmondi\Gut\Action\User\GetUser;
 use Jmondi\Gut\DomainModel\User\User;
 use Jmondi\Gut\Test\TestCase\ActionTestCase;
 
-class GetUserHandler extends ActionTestCase
+class GetUserHandlerTest extends ActionTestCase
 {
     protected $metaDataClassNames = [
         User::class,
@@ -19,8 +19,6 @@ class GetUserHandler extends ActionTestCase
         $command = $this->dispatchQuery(
             new GetUser($user->getId())
         );
-
-        var_dump($command);
 
         $this->assertTrue(true);
     }
