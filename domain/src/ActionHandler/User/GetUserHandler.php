@@ -3,7 +3,7 @@ namespace Jmondi\Gut\ActionHandler\User;
 
 use Jmondi\Gut\Action\User\GetUser;
 use Jmondi\Gut\DomainModel\User\User;
-use Jmondi\Gut\Infrastructure\Autorization\AuthorizationContextInterface;
+use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextInterface;
 use Jmondi\Gut\Infrastructure\Lib\Query\QueryHandlerInterface;
 use Jmondi\Gut\Infrastructure\Repository\User\UserRepositoryInterface;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Autorization;
+namespace Jmondi\Gut\Infrastructure\Authorization;
 
 use Exception;
 use Jmondi\Gut\DomainModel\Exception\ApplicationException;

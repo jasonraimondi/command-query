@@ -2,8 +2,8 @@
 namespace Jmondi\Gut\Infrastructure\Authorization;
 
 use Jmondi\Gut\DomainModel\OAuth\OAuthAccessToken;
-use Jmondi\Gut\Infrastructure\Autorization\AuthorizationContextException;
-use Jmondi\Gut\Infrastructure\Autorization\AuthorizationContextInterface;
+use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextException;
+use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextInterface;
 
 class OAuthAuthorizationContext implements AuthorizationContextInterface
 {

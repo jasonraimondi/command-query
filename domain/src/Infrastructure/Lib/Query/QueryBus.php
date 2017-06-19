@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Lib\Query;
 
-use Jmondi\Gut\Infrastructure\Autorization\AuthorizationContextInterface;
+use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextInterface;
 use Jmondi\Gut\Infrastructure\Lib\MapperInterface;
 
 class QueryBus implements QueryBusInterface
@@ -16,6 +16,8 @@ class QueryBus implements QueryBusInterface
         AuthorizationContextInterface $authorizationContext,
         MapperInterface $mapper
     ) {
+        var_dump($mapper);
+        die();
         $this->authorizationContext = $authorizationContext;
         $this->mapper = $mapper;
     }

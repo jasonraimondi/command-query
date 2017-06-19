@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Lib\Command;
 
-use Jmondi\Gut\Infrastructure\Autorization\AuthorizationContextInterface;
+use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextInterface;
 use Jmondi\Gut\Infrastructure\Lib\MapperInterface;
 
 class CommandBus implements CommandBusInterface

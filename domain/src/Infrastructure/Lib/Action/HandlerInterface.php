@@ -1,8 +1,8 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Lib\Action;
 
-use Jmondi\Gut\Infrastructure\Autorization\AuthorizationContextException;
-use Jmondi\Gut\Infrastructure\Autorization\AuthorizationContextInterface;
+use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextException;
+use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextInterface;
 use Jmondi\Gut\Infrastructure\Lib\Query\ResponseInterface;
 
 interface HandlerInterface
