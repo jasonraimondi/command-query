@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Lib;
+namespace Jmondi\Gut\Infrastructure\Lib\Mapper;
 
 use Jmondi\Gut\Infrastructure\Lib\Action\ActionInterface;
 use Jmondi\Gut\Infrastructure\Lib\Command\CommandInterface;

@@ -4,11 +4,12 @@ namespace Jmondi\Gut\Test\TestCase;
 use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextInterface;
 use Jmondi\Gut\Infrastructure\Lib\Command\CommandBus;
 use Jmondi\Gut\Infrastructure\Lib\Command\CommandInterface;
-use Jmondi\Gut\Infrastructure\Lib\Mapper;
+use Jmondi\Gut\Infrastructure\Lib\Mapper\Mapper;
+use Jmondi\Gut\Infrastructure\Lib\Mapper\MapperInterface;
 use Jmondi\Gut\Infrastructure\Lib\Query\QueryBus;
 use Jmondi\Gut\Infrastructure\Lib\Query\QueryInterface;
 use Jmondi\Gut\Infrastructure\Lib\Query\ResponseInterface;
-use Jmondi\Gut\Tests\Helper\AuthorizationContext\AlwaysAuthorizedForTestingAuthorizationContext;
+use Jmondi\Gut\Test\Helper\AuthorizationContext\AlwaysAuthorizedForTestingAuthorizationContext;
 
 abstract class ActionTestCase extends DummyRepositoryTestCase
 {

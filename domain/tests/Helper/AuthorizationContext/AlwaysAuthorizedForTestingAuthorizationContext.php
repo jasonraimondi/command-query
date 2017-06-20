@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Tests\Helper\AuthorizationContext;
+namespace Jmondi\Gut\Test\Helper\AuthorizationContext;
 
 use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextException;
 use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextInterface;

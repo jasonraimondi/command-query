@@ -2,7 +2,7 @@
 namespace Jmondi\Gut\Infrastructure\Lib\Query;
 
 use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextInterface;
-use Jmondi\Gut\Infrastructure\Lib\MapperInterface;
+use Jmondi\Gut\Infrastructure\Lib\Mapper\MapperInterface;
 
 class QueryBus implements QueryBusInterface
 {
