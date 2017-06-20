@@ -16,8 +16,6 @@ class QueryBus implements QueryBusInterface
         AuthorizationContextInterface $authorizationContext,
         MapperInterface $mapper
     ) {
-        var_dump($mapper);
-        die();
         $this->authorizationContext = $authorizationContext;
         $this->mapper = $mapper;
     }
