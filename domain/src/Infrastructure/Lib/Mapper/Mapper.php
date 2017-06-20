@@ -84,8 +84,7 @@ class Mapper implements MapperInterface
         $pieces = explode('\\', $className);
 
         $baseName = array_pop($pieces);
-        $handlerBaseName = substr($baseName, 0, -7) . 'Handler';
-
+        $handlerBaseName = $baseName . 'Handler';
         $pieces[] = $handlerBaseName;
 
         return implode('\\', $pieces);
@@ -102,7 +101,7 @@ class Mapper implements MapperInterface
         $pieces = explode('\\', $className);
 
         $baseName = array_pop($pieces);
-        $handlerBaseName = substr($baseName, 0, -5) . 'Handler';
+        $handlerBaseName = $baseName . 'Handler';
 
         $pieces[] = $handlerBaseName;
 
