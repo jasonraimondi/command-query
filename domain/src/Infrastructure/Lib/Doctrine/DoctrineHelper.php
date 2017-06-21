@@ -2,6 +2,7 @@
 namespace Jmondi\Gut\Infrastructure\Lib\Doctrine;
 
 use Doctrine;
+use Jmondi\Gut\DomainModel\Doctrine\Extension\DateTimeIntegerType;
 use Jmondi\Gut\DomainModel\Doctrine\Extension\UuidBinaryType;
 
 class DoctrineHelper
@@ -68,6 +69,7 @@ class DoctrineHelper
         $this->entityManagerConfiguration = $this->entityManager->getConnection()->getConfiguration();
 
         $this->addUuidType();
+        $this->addDateTimeIntegerType();
     }
 
     private function addUuidType()
@@ -82,6 +84,22 @@ class DoctrineHelper
         static $isAdded = false;
         if (! $isAdded) {
             Doctrine\DBAL\Types\Type::addType('uuid_binary', UuidBinaryType::class);
+            $isAdded = true;
+        }
+    }
+
+    private function addDateTimeIntegerType()
+    {
+        $this->setupDateTimeIntegerType();
+        $platform = $this->entityManager->getConnection()->getDatabasePlatform();
+        $platform->registerDoctrineTypeMapping('datetime_integer', 'integer');
+    }
+
+    private function setupDateTimeIntegerType()
+    {
+        static $isAdded = false;
+        if (! $isAdded) {
+            Doctrine\DBAL\Types\Type::addType('datetime_integer', DateTimeIntegerType::class);
             $isAdded = true;
         }
     }

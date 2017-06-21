@@ -5,8 +5,6 @@ use DateTime;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
-use InvalidArgumentException;
-use Ramsey\Uuid\Uuid;
 
 class DateTimeIntegerType extends Type
 {
@@ -29,7 +27,7 @@ class DateTimeIntegerType extends Type
     /**
      * {@inheritdoc}
      *
-     * @param string|null $value
+     * @param int|null $value
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
@@ -52,7 +50,7 @@ class DateTimeIntegerType extends Type
     /**
      * {@inheritdoc}
      *
-     * @param Uuid|null $value
+     * @param DateTime|null $value
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
@@ -61,17 +59,11 @@ class DateTimeIntegerType extends Type
             return null;
         }
 
-        if ($value instanceof Uuid) {
-            return $value->getBytes();
+        if ($value instanceof DateTime) {
+            return $value->getTimestamp();
         }
 
-        try {
-            $uuid = Uuid::fromString($value);
-        } catch (InvalidArgumentException $e) {
-            throw ConversionException::conversionFailed($value, static::NAME);
-        }
-
-        return $uuid->getBytes();
+        throw ConversionException::conversionFailed($value, static::NAME);
     }
 
     /**

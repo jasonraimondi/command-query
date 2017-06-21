@@ -6,7 +6,7 @@ use DateTimeZone;
 
 trait CreatedAtTrait
 {
-    /** @var int */
+    /** @var DateTime */
     protected $createdAt;
 
     /**
@@ -25,8 +25,6 @@ trait CreatedAtTrait
      */
     public function getCreatedAt()
     {
-        $createdAt = new DateTime();
-        $createdAt->setTimestamp($this->createdAt);
-        return $createdAt;
+        return $this->createdAt;
     }
 }
