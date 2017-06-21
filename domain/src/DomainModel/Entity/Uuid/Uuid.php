@@ -48,6 +48,11 @@ class Uuid implements UuidInterface
         return $this->ramseyUuid->toString();
     }
 
+    public function __toString()
+    {
+        return $this->toString();
+    }
+
     public function toBytes(): string
     {
         return $this->ramseyUuid->getBytes();
