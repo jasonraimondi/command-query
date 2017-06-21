@@ -1,22 +1,26 @@
 <?php
-namespace Jmondi\Gut\Test\ActionHandler\User;
+namespace Jmondi\Gut\Test\ActionHandler\OAuth;
 
-use Jmondi\Gut\Action\User\GetUser;
+use Jmondi\Gut\Action\OAuth\GetOAuthAccessToken;
+use Jmondi\Gut\DomainModel\OAuth\OAuthAccessToken;
+use Jmondi\Gut\DomainModel\OAuth\OAuthClient;
 use Jmondi\Gut\DomainModel\User\User;
 use Jmondi\Gut\Test\TestCase\ActionTestCase;
 
-class GetUserHandlerTest extends ActionTestCase
+class GetOAuthAccessTokenHandlerTest extends ActionTestCase
 {
     protected $metaDataClassNames = [
         User::class,
+        OAuthClient::class,
+        OAuthAccessToken::class,
     ];
 
     public function testHandle()
     {
-        $user = $this->addDummyUserToRepository();
+        $user = $this->addDummyOAuthAccessTokenToRepository();
 
         $query = $this->dispatchQuery(
-            new GetUser($user->getId())
+            new GetOAuthAccessToken($user->getId())
         );
         $this->entityManager->flush();
         $this->entityManager->clear();
