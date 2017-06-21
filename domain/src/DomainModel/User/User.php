@@ -24,11 +24,6 @@ class User implements UuidEntityInterface
         $this->email = $email;
     }
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
     public function getEmail(): string
     {
         return $this->email;

@@ -28,10 +28,8 @@ final class GetUserHandler implements QueryHandlerInterface
         $authorizationContext->verifyIsAuthenticated();
     }
 
-    public function execute(): User
+    public function execute()
     {
-        return $this->userRepository->getById(
-            $this->query->getUserId()
-        );
+        return $this->userRepository->getById($this->query->getUserId());
     }
 }

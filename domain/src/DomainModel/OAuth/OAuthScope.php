@@ -18,7 +18,7 @@ class OAuthScope implements StringEntityInterface
         string $name,
         ?string $id = null
     ) {
-        $this->setId($id);
+        $this->setUuid($id);
         $this->setCreatedAt();
         $this->name = $name;
     }
