@@ -18,6 +18,8 @@ abstract class ApplicationTestCase extends TestCase
                 get_class($entity1) . ': ' . $entity1->getId() . PHP_EOL .
                 get_class($entity2) . ': ' . $entity2->getId()
             );
+        } else {
+            $this->assertSame($entity1->getId(), $entity2->getId());
         }
     }
 
