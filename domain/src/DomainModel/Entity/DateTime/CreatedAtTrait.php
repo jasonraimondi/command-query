@@ -17,7 +17,7 @@ trait CreatedAtTrait
         if ($createdAt === null) {
             $createdAt = new DateTime('now', new DateTimeZone('UTC'));
         }
-        $this->createdAt = $createdAt->getTimestamp();
+        $this->createdAt = $createdAt;
     }
 
     /**

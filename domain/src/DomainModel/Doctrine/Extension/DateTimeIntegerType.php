@@ -36,7 +36,7 @@ class DateTimeIntegerType extends Type
             return null;
         }
 
-        if (is_int($value)) {
+        if (is_numeric($value)) {
             $dateTime = new DateTime();
             $dateTime->setTimestamp($value);
             return $dateTime;
@@ -44,6 +44,7 @@ class DateTimeIntegerType extends Type
             return $value;
 
         }
+
         throw ConversionException::conversionFailed($value, static::NAME);
     }
 
