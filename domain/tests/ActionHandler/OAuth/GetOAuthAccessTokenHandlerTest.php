@@ -26,7 +26,7 @@ class GetOAuthAccessTokenHandlerTest extends ActionTestCase
         $this->entityManager->clear();
 
         $sut = $this->getRepositoryFactory()
-            ->getUserRepository()
+            ->getOAuthAccessTokenRepository()
             ->getById($user->getId());
 
         $this->assertEntitiesEqual($user, $sut);

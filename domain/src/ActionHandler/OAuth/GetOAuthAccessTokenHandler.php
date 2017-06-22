@@ -28,6 +28,8 @@ final class GetOAuthAccessTokenHandler implements QueryHandlerInterface
 
     public function execute()
     {
-        return $this->accessTokenRepository->getById($this->query->getOAuthAccessTokenId());
+        return $this->accessTokenRepository->getById(
+            $this->query->getOAuthAccessTokenId()
+        );
     }
 }

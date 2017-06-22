@@ -4,6 +4,11 @@ namespace Jmondi\Gut\Infrastructure\Lib\Mapper;
 use Jmondi\Gut\Infrastructure\Lib\Action\ActionInterface;
 use Jmondi\Gut\Infrastructure\Lib\Command\CommandInterface;
 use Jmondi\Gut\Infrastructure\Lib\Query\QueryInterface;
+use Jmondi\Gut\Infrastructure\Repository\OAuth\OAuthAccessTokenRepositoryInterface;
+use Jmondi\Gut\Infrastructure\Repository\OAuth\OAuthAuthCodeRepositoryInterface;
+use Jmondi\Gut\Infrastructure\Repository\OAuth\OAuthClientRepositoryInterface;
+use Jmondi\Gut\Infrastructure\Repository\OAuth\OAuthRefreshTokenRepositoryInterface;
+use Jmondi\Gut\Infrastructure\Repository\OAuth\OAuthScopeRepositoryInterface;
 use Jmondi\Gut\Infrastructure\Repository\User\UserRepositoryInterface;
 use Jmondi\Gut\Infrastructure\Repository\RepositoryFactory;
 use Jmondi\Gut\Infrastructure\Service\ServiceFactory;
@@ -56,7 +61,18 @@ class Mapper implements MapperInterface
                 }
 
                 $parameterClassName = $parameter->getClass()->getName();
-                if ($parameterClassName === UserRepositoryInterface::class) {
+
+                if ($parameterClassName === OAuthAccessTokenRepositoryInterface::class) {
+                    $constructorParameters[] = $this->repositoryFactory->getOAuthAccessTokenRepository();
+                } elseif ($parameterClassName === OAuthAuthCodeRepositoryInterface::class) {
+                    $constructorParameters[] = $this->repositoryFactory->getOAuthAuthCodeRepository();
+                } elseif ($parameterClassName === OAuthClientRepositoryInterface::class) {
+                    $constructorParameters[] = $this->repositoryFactory->getOAuthClientRepository();
+                } elseif ($parameterClassName === OAuthRefreshTokenRepositoryInterface::class) {
+                    $constructorParameters[] = $this->repositoryFactory->getOAuthRefreshTokenRepository();
+                } elseif ($parameterClassName === OAuthScopeRepositoryInterface::class) {
+                    $constructorParameters[] = $this->repositoryFactory->getOAuthScopeRepository();
+                } elseif ($parameterClassName === UserRepositoryInterface::class) {
                     $constructorParameters[] = $this->repositoryFactory->getUserRepository();
                 }
             }
