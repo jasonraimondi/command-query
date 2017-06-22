@@ -20,8 +20,8 @@ class DoctrineOAuthRefreshTokenRepository implements OAuthRefreshTokenRepository
     {
         return $this->returnOrThrowNotFoundException(
             $this->getQueryBuilder()
-                ->where('OAuthRefreshToken.id = :OAuthRefreshTokenId')
-                ->setParameter('OAuthRefreshTokenId', Uuid::fromString($oauthRefreshTokenId)->toBytes())
+                ->where('OAuthRefreshToken.identifier = :OAuthRefreshTokenId')
+                ->setParameter('OAuthRefreshTokenId', $oauthRefreshTokenId)
                 ->getQuery()
                 ->getOneOrNullResult()
         );

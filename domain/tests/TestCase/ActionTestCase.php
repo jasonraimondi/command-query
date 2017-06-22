@@ -5,7 +5,6 @@ use Jmondi\Gut\Infrastructure\Authorization\AuthorizationContextInterface;
 use Jmondi\Gut\Infrastructure\Lib\Command\CommandBus;
 use Jmondi\Gut\Infrastructure\Lib\Command\CommandInterface;
 use Jmondi\Gut\Infrastructure\Lib\Mapper\Mapper;
-use Jmondi\Gut\Infrastructure\Lib\Mapper\MapperInterface;
 use Jmondi\Gut\Infrastructure\Lib\Query\QueryBus;
 use Jmondi\Gut\Infrastructure\Lib\Query\QueryInterface;
 use Jmondi\Gut\Infrastructure\Lib\Query\ResponseInterface;
