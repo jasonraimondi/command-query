@@ -1,10 +1,8 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const tslint = require('./tslint');
 const projectRoot = path.resolve(__dirname, './');
 const pathsToClean = ['dist'];
 const cleanOptions = {
@@ -34,22 +32,16 @@ module.exports = {
         use: 'raw-loader',
       },
       {
-        test: /\.ts$/,
-        loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.ts$/,
-        enforce: 'pre',
-        loader: 'tslint-loader',
-        options: tslint
-      },
-      {
         test: /\.(css|scss)$/,
         loader: ExtractTextPlugin.extract({
           use: 'css-loader!sass-loader',
           fallback: 'style-loader',
         }),
+      },
+      {
+        test: /\.ts$/,
+        loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
+        exclude: /node_modules/,
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/,
@@ -67,9 +59,6 @@ module.exports = {
       filename: 'css/[name].[hash].package.css',
       allChunks: true,
     }),
-    new HtmlWebpackPlugin({
-      template: projectRoot + '/src/index.html'
-    }),
 
     // @see https://github.com/angular/angular/issues/14898#issuecomment-284039716
     //
@@ -78,7 +67,6 @@ module.exports = {
       /angular(\\|\/)core(\\|\/)@angular/,
       projectRoot + '/src'
     ),
-
 
     // @see https://angular.io/docs/ts/latest/guide/webpack.html#!#commons-chunk-plugin
     //
