@@ -14,25 +14,17 @@ class TemplateNamespace
         $this->namespace = $namespace;
     }
 
-    public static function base()
+    public static function createFromNamespace(string $namespace)
     {
-        $namespace = '_base';
-        $templatesPath = realpath(__DIR__ . '/../../../../templates') . '/' . $namespace;
-        return new self($templatesPath, $namespace);
+        return new static(
+            self::getBaseTemplatePath($namespace),
+            $namespace
+        );
     }
 
-    public static function auth()
+    public static function getBaseTemplatePath(string $namespace)
     {
-        $namespace = 'auth';
-        $templatesPath = realpath(__DIR__ . '/../../../../templates') . '/' . $namespace;
-        return new self($templatesPath, $namespace);
-    }
-
-    public static function clientLibs()
-    {
-        $namespace = 'client-libs';
-        $templatesPath = realpath(__DIR__ . '/../../../../templates') . '/' . $namespace;
-        return new self($templatesPath, $namespace);
+        return realpath(__DIR__ . '/../../../../templates') . '/' . $namespace;
     }
 
     public function getTemplatesPath(): string

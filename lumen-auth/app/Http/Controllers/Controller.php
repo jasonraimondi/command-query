@@ -13,9 +13,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->templateGenerator = new AuthTemplateGenerator(
-            new LaravelRouteUrl()
-        );
+        $this->templateGenerator = new AuthTemplateGenerator(new LaravelRouteUrl());
     }
 
     protected function renderView(string $page, array $parameters = [])

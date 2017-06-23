@@ -2,9 +2,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const projectRoot = path.resolve(__dirname, './');
-const pathsToClean = ['dist'];
+const pathsToClean = ['dist', 'assets'];
 const cleanOptions = {
   root: projectRoot,
   verbose: true,
@@ -19,8 +20,8 @@ module.exports = {
     app: projectRoot + '/src/main.ts',
   },
   output: {
-    path: projectRoot + '/dist',
-    filename: 'js/[name].[hash].package.js'
+    path: projectRoot + '/assets',
+    filename: '[name].[hash].package.js'
   },
   resolve: {
     extensions: ['.ts', '.js', '.css', '.scss', '.html', '.svg', '.jpg', '.jpeg', '.png', '.gif'],
@@ -53,10 +54,11 @@ module.exports = {
     ],
   },
   plugins: [
+    new ManifestPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin(pathsToClean, cleanOptions),
     new ExtractTextPlugin({
-      filename: 'css/[name].[hash].package.css',
+      filename: '[name].[hash].package.css',
       allChunks: true,
     }),
 

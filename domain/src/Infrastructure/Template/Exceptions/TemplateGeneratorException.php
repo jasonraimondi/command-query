@@ -9,4 +9,9 @@ class TemplateGeneratorException extends Exception
     {
         return new self('Template not found: ' . $templateName);
     }
+
+    public static function manifestNotFound(): self
+    {
+        return new self('Manifest not found');
+    }
 }

@@ -4,6 +4,7 @@ namespace Jmondi\Gut\Infrastructure\Template\Twig;
 
 use Jmondi\Gut\Infrastructure\Template\LeagueCommonMark\MarkdownParser;
 use Jmondi\Gut\Infrastructure\Template\RouteUrlInterface;
+use Jmondi\Gut\Infrastructure\Template\Twig\Extensions\TwigAssetManifestUrlExtension;
 use Jmondi\Gut\Infrastructure\Template\Twig\Extensions\TwigAssetUrlExtension;
 use Jmondi\Gut\Infrastructure\Template\Twig\Extensions\TwigMarkdownExtension;
 use Jmondi\Gut\Infrastructure\Template\Twig\Extensions\TwigRouteUrlExtension;
@@ -24,9 +25,10 @@ class TwigTemplateGenerator
     public static function createTemplateGenerator(RouteUrlInterface $routeUrl)
     {
         return new self([
-            TemplateNamespace::auth(),
-            TemplateNamespace::clientLibs(),
-            TemplateNamespace::base(),
+            TemplateNamespace::createFromNamespace('_base'),
+            TemplateNamespace::createFromNamespace('auth'),
+            TemplateNamespace::createFromNamespace('client-libs'),
+            TemplateNamespace::createFromNamespace('frontend'),
         ], $routeUrl);
     }
 
@@ -51,9 +53,7 @@ class TwigTemplateGenerator
 
     private function addTwigExtensions()
     {
-        foreach ($this->getAllExtensions() as $extension) {
-            $this->twigEnvironment->addExtension($extension);
-        }
+        $this->twigEnvironment->setExtensions($this->getAllExtensions());
     }
 
     private function addTwigTemplateNamespaces()
@@ -71,6 +71,7 @@ class TwigTemplateGenerator
         return [
             new TwigMarkdownExtension(MarkdownParser::createFromNothing()),
             new TwigAssetUrlExtension($this->routeUrl),
+            new TwigAssetManifestUrlExtension($this->routeUrl),
             new TwigRouteUrlExtension($this->routeUrl),
         ];
     }

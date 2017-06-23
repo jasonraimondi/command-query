@@ -5,6 +5,6 @@ class ImplicitController extends Controller
 {
     public function index()
     {
-        return $this->renderView('pages/login', []);
+        return $this->renderView('@frontend/pages/home', []);
     }
 }
