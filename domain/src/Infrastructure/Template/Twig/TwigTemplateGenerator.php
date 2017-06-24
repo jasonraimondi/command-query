@@ -25,7 +25,6 @@ class TwigTemplateGenerator
     public static function createTemplateGenerator(RouteUrlInterface $routeUrl)
     {
         return new self([
-            TemplateNamespace::createFromNamespace('_base'),
             TemplateNamespace::createFromNamespace('auth'),
             TemplateNamespace::createFromNamespace('client-libs'),
             TemplateNamespace::createFromNamespace('frontend'),

@@ -24,7 +24,7 @@ class TemplateNamespace
 
     public static function getBaseTemplatePath(string $namespace)
     {
-        return realpath(__DIR__ . '/../../../../templates') . '/' . $namespace;
+        return realpath(__DIR__ . '/../../../../../templates') . '/' . $namespace;
     }
 
     public function getTemplatesPath(): string

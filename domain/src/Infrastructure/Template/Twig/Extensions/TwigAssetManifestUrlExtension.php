@@ -39,8 +39,7 @@ class TwigAssetManifestUrlExtension extends Twig_Extension
         }
 
         $assetLocationService = new AssetLocationService();
-        $assetManifest = $assetLocationService->getTemplateManifest($templateNamespace);
-        $assetManifest = $assetManifest[$path] ?? $path;
+        $assetManifest = $assetLocationService->getTemplateManifest($templateNamespace)[$path] ?? $path;
 
         return $this->routeUrl->getRoute(
             'asset.serve',

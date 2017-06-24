@@ -1,0 +1,17 @@
+{% extends '@frontend/layouts/default.twig' %}
+
+{% block content %}
+    <app-root>
+        Loading...
+    </app-root>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ assetManifestUrl('@frontend', 'app.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ assetManifestUrl('@frontend', 'polyfills.js') }}"></script>
+    <script src="{{ assetManifestUrl('@frontend', 'vendor.js') }}"></script>
+    <script src="{{ assetManifestUrl('@frontend', 'app.js') }}"></script>
+{% endblock %}

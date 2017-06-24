@@ -1,8 +1,6 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Template;
 
-use Jmondi\Gut\Infrastructure\Template\Exceptions\TemplateGeneratorException;
-
 class AssetLocationService
 {
     public function getTemplateAssetFilepath(string $templateNamespace, string $path)
@@ -19,20 +17,15 @@ class AssetLocationService
 
     public function getTemplatesBasePath(string $templateNamespace): string
     {
-        return realpath(__DIR__ . '/../../../') . '/templates/' . $this->stripNamespaceAt($templateNamespace);
+        return realpath(__DIR__ . '/../../../../') . '/templates/' . $this->stripNamespaceAt($templateNamespace);
     }
 
     private function stripNamespaceAt(string $templateNamespace): string
     {
         if ($templateNamespace[0] === '@') {
-            $templateNamespace = $this->removeAtSymbol($templateNamespace);
+            $templateNamespace = substr($templateNamespace, 1);
         }
         return $templateNamespace;
-    }
-
-    private function removeAtSymbol(string $templateNamespace): string
-    {
-        return substr($templateNamespace, 1);
     }
 
     public function getTemplateManifest(string $templateNamespace): array
