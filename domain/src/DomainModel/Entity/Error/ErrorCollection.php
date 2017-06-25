@@ -8,6 +8,10 @@ class ErrorCollection implements JsonSerializable
     /** @var array|ErrorDetail[] */
     private $errors;
 
+    /**
+     * ErrorCollection constructor.
+     * @param ErrorDetail[] $errors
+     */
     public function __construct(array $errors)
     {
         $this->errors = $errors;

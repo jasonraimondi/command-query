@@ -68,7 +68,7 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+ $app->register(Jmondi\Auth\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 
 /*

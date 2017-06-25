@@ -32,6 +32,19 @@ final class ApplicationCore
     /** @var null|ServiceFactory */
     private $serviceFactory;
 
+    public static function createMysqlConnection(): ApplicationCore
+    {
+        return new self([
+            'driver' => 'pdo_mysql',
+            'dbname' => getenv('MYSQL_DATABASE') ?: 'jmondi',
+            'user' => getenv('MYSQL_USER') ?: 'root',
+            'password' => getenv('MYSQL_PASSWORD') ?: 'secret',
+            'host' => getenv('MYSQL_HOST') ?: '127.0.0.1',
+            'port' => getenv('MYSQL_PORT') ?: '33066',
+            'charset' => 'utf8mb4',
+        ]);
+    }
+
     public function __construct(array $doctrineDbParams)
     {
         $this->doctrineDbParams = $doctrineDbParams;
