@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template;
+namespace Jmondi\Gut\Infrastructure\Template\Assets;
 
 class AssetLocationService
 {
@@ -17,7 +17,7 @@ class AssetLocationService
 
     public function getTemplatesBasePath(string $templateNamespace): string
     {
-        return realpath(__DIR__ . '/../../../../') . '/templates/' . $this->stripNamespaceAt($templateNamespace);
+        return realpath(__DIR__ . '/../../../../../') . '/templates/' . $this->stripNamespaceAt($templateNamespace);
     }
 
     private function stripNamespaceAt(string $templateNamespace): string

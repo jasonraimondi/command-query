@@ -1,9 +1,9 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Template\Twig\Extensions;
 
-use Jmondi\Gut\Infrastructure\Template\AssetLocationService;
+use Jmondi\Gut\Infrastructure\Template\Assets\AssetLocationService;
+use Jmondi\Gut\Infrastructure\Template\Assets\RouteUrlInterface;
 use Jmondi\Gut\Infrastructure\Template\Exceptions\TemplateAssetException;
-use Jmondi\Gut\Infrastructure\Template\RouteUrlInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
 

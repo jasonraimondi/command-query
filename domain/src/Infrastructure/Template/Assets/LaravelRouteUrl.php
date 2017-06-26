@@ -1,5 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template;
+namespace Jmondi\Gut\Infrastructure\Template\Assets;
 
 use Jmondi\Gut\DomainModel\Exception\InvalidFunctionException;
 

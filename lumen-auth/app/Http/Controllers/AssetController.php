@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Auth\Http\Controllers;
 
-use Jmondi\Gut\Infrastructure\Template\AssetLocationService;
+use Jmondi\Gut\Infrastructure\Template\Assets\AssetLocationService;
 
 class AssetController extends Controller
 {

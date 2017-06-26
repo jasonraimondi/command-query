@@ -1,7 +1,5 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template\Twig;
-
-use Jmondi\Gut\Infrastructure\Template\RouteUrlInterface;
+namespace Jmondi\Gut\Infrastructure\Template\Assets;
 
 class BlankRouteUrlGenerator implements RouteUrlInterface
 {

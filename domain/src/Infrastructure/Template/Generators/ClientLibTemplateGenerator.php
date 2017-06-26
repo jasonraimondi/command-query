@@ -1,7 +1,7 @@
 <?php
 namespace Jmondi\Gut\Infrastructure\Template\Generators;
 
-use Jmondi\Gut\Infrastructure\Template\Twig\BlankRouteUrlGenerator;
+use Jmondi\Gut\Infrastructure\Template\Assets\BlankRouteUrlGenerator;
 
 final class ClientLibTemplateGenerator extends AbstractTemplateGenerator
 {

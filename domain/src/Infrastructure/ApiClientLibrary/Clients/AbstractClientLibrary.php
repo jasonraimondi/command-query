@@ -3,8 +3,6 @@ namespace Jmondi\Gut\Infrastructure\ApiClientLibrary\Clients;
 
 use Jmondi\Gut\Infrastructure\Describer\DomainDescriber;
 use Jmondi\Gut\Infrastructure\Template\Generators\ClientLibTemplateGenerator;
-use Jmondi\Gut\Infrastructure\Template\Twig\TemplateNamespace;
-use Jmondi\Gut\Infrastructure\Template\Twig\TwigTemplateGenerator;
 
 abstract class AbstractClientLibrary
 {
@@ -19,9 +17,6 @@ abstract class AbstractClientLibrary
     /** @var ClientLibTemplateGenerator */
     protected $sdkTemplateGenerator;
 
-    abstract public static function createNewClient();
-    abstract public function renderFullSDK(): void;
-
     protected function __construct(string $extension, string $clientLibraryName, string $pathInClientLibrary = '')
     {
         $this->name = $clientLibraryName;
@@ -30,8 +25,16 @@ abstract class AbstractClientLibrary
         $this->apiDescriber = new DomainDescriber();
     }
 
-    protected function render(string $templateName, array $parameters, string $outputFilePath, string $outputFileName): void
-    {
+    abstract public static function createNewClient();
+
+    abstract public function renderFullSDK(): void;
+
+    protected function render(
+        string $templateName,
+        array $parameters,
+        string $outputFilePath,
+        string $outputFileName
+    ): void {
         $twigContent = $this->getTemplateGenerator()->renderView(
             $this->name . '/' . $templateName,
             $parameters

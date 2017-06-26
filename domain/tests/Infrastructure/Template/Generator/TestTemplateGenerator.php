@@ -1,10 +1,11 @@
 <?php
-namespace Jmondi\Gut\Infrastructure\Template\Generators;
+namespace Jmondi\Gut\Test\Infrastructure\Template\Generator;
 
+use Jmondi\Gut\Infrastructure\Template\Generators\AbstractTemplateGenerator;
 use Jmondi\Gut\Infrastructure\Template\Twig\TwigThemeConfig;
 use Twig_Extension;
 
-final class AuthTemplateGenerator extends AbstractTemplateGenerator
+class TestTemplateGenerator extends AbstractTemplateGenerator
 {
     /**
      * @return Twig_Extension[]
@@ -20,7 +21,7 @@ final class AuthTemplateGenerator extends AbstractTemplateGenerator
     protected function getThemeConfigs(): array
     {
         return [
-            TwigThemeConfig::loadConfigFromNamespace('auth'),
+            TwigThemeConfig::loadConfigFromNamespace('tests'),
         ];
     }
 }

@@ -1,14 +1,8 @@
 <?php
-
 namespace Jmondi\Gut\Infrastructure\Template\Twig;
 
-use Jmondi\Gut\Infrastructure\Template\LeagueCommonMark\MarkdownParser;
-use Jmondi\Gut\Infrastructure\Template\RouteUrlInterface;
-use Jmondi\Gut\Infrastructure\Template\Twig\Extensions\TwigAssetManifestUrlExtension;
-use Jmondi\Gut\Infrastructure\Template\Twig\Extensions\TwigAssetUrlExtension;
-use Jmondi\Gut\Infrastructure\Template\Twig\Extensions\TwigMarkdownExtension;
-use Jmondi\Gut\Infrastructure\Template\Twig\Extensions\TwigRouteUrlExtension;
 use Twig_Environment;
+use Twig_Extension;
 use Twig_Loader_Filesystem;
 
 class TwigTemplateGenerator
@@ -17,61 +11,42 @@ class TwigTemplateGenerator
     private $twigEnvironment;
     /** @var Twig_Loader_Filesystem */
     private $twigLoader;
-    /** @var array|TemplateNamespace[] */
-    private $twigTemplateNamespaces;
-    /** @var RouteUrlInterface */
-    private $routeUrl;
-
-    public static function createTemplateGenerator(RouteUrlInterface $routeUrl)
-    {
-        return new self([
-            TemplateNamespace::createFromNamespace('auth'),
-            TemplateNamespace::createFromNamespace('client-libs'),
-            TemplateNamespace::createFromNamespace('frontend'),
-        ], $routeUrl);
-    }
+    /** @var array|TwigThemeConfig[] */
+    private $twigThemeConfigs;
 
     /**
-     * @param TemplateNamespace[] $twigTemplateNamespaces
-     * @param RouteUrlInterface $routeUrl
+     * @param TwigThemeConfig[] $twigThemeConfigs
+     * @param Twig_Extension[] $twigExtensions
      */
-    private function __construct(array $twigTemplateNamespaces, RouteUrlInterface $routeUrl)
+    public function __construct(array $twigThemeConfigs, array $twigExtensions)
     {
         $this->twigLoader = new Twig_Loader_Filesystem();
         $this->twigEnvironment = new Twig_Environment($this->twigLoader);
-        $this->twigTemplateNamespaces = $twigTemplateNamespaces;
-        $this->routeUrl = $routeUrl;
-        $this->addTwigExtensions();
-        $this->addTwigTemplateNamespaces();
+        $this->twigThemeConfigs = $twigThemeConfigs;
+        $this->addTwigExtensions($twigExtensions);
+        $this->addTwigTwigThemeConfigs($twigThemeConfigs);
+    }
+
+    private function addTwigExtensions($twigExtensions)
+    {
+        $this->twigEnvironment->setExtensions($twigExtensions);
+    }
+
+    /**
+     * @param TwigThemeConfig[] $twigThemeConfigs
+     */
+    private function addTwigTwigThemeConfigs(array $twigThemeConfigs)
+    {
+        foreach ($twigThemeConfigs as $config) {
+            $this->twigLoader->setPaths(
+                $config->getTwigTemplatePaths(),
+                $config->getNamespace()
+            );
+        }
     }
 
     public function getTwigEnvironment()
     {
         return $this->twigEnvironment;
-    }
-
-    private function addTwigExtensions()
-    {
-        $this->twigEnvironment->setExtensions($this->getAllExtensions());
-    }
-
-    private function addTwigTemplateNamespaces()
-    {
-        foreach ($this->twigTemplateNamespaces as $templateNamespace) {
-            $this->twigLoader->addPath(
-                $templateNamespace->getTemplatesPath(),
-                $templateNamespace->getNamespace()
-            );
-        }
-    }
-
-    private function getAllExtensions(): array
-    {
-        return [
-            new TwigMarkdownExtension(MarkdownParser::createFromNothing()),
-            new TwigAssetUrlExtension($this->routeUrl),
-            new TwigAssetManifestUrlExtension($this->routeUrl),
-            new TwigRouteUrlExtension($this->routeUrl),
-        ];
     }
 }
