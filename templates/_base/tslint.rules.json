@@ -1,0 +1,34 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "array-type": [true, "array"],
+    "ban-types": [true, ["Object", "Use {} instead."], ["String"]],
+    "eofline": true,
+    "indent": [true, "spaces", 2],
+    "max-line-length": [true, 120],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          {
+            "name": "static non-private",
+            "kinds": [
+              "public-static-field",
+              "protected-static-field",
+              "public-static-method",
+              "protected-static-method"
+            ]
+          },
+          "constructor"
+        ]
+      }
+    ],
+    "no-any": true,
+    "no-console": true,
+    "no-empty-interface": true,
+    "no-irregular-whitespace": true,
+    "no-string-literal": true,
+    "quotemark": [true, "double", "avoid-escape"],
+    "semicolon": [true, "always"]
+  }
+}

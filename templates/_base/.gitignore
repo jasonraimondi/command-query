@@ -1,0 +1,5 @@
+node_modules/
+dist/
+assets/
+.idea/workspace.xml
+.idea/tasks.xml

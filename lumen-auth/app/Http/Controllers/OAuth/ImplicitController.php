@@ -23,7 +23,7 @@ class ImplicitController extends AbstractLeagueOAuthController
             return $this->createValidationErrorResponse($e);
         }
 
-        return $this->renderView('pages/login', [
+        return $this->renderView('@auth/pages/login', [
             'clientId' => $request->get('client_id'),
             'responseType' => $request->get('response_type'),
             'redirectUri' => $request->get('redirect_uri'),

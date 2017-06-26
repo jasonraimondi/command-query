@@ -7,7 +7,7 @@ services:
      - "33066:3306"
     env_file: ./.env
     volumes:
-     - ../logs/mysql:/var/log
+     - ../data/logs/mysql:/var/log
      - ../data/database:/var/lib/mysql
 
   nginx:
@@ -15,12 +15,10 @@ services:
     ports:
       - "8010:80"
       - "8011:81"
-      - "8012:82"
     volumes:
-     - ../logs/nginx:/var/log
+     - ../data/logs/nginx:/var/log
      - ../api-client-libraries:/var/www/api-client-libraries
      - ../domain:/var/www/domain
-     - ../frontend:/var/www/frontend
      - ../lumen-auth:/var/www/lumen-auth
      - ../templates:/var/www/templates
 
@@ -30,7 +28,7 @@ services:
       - "9000:9000"
     env_file: ./.env
     volumes:
-     - ../logs/php:/var/log
+     - ../data/logs/php:/var/log
      - ../domain:/var/www/domain
      - ../lumen-auth:/var/www/lumen-auth
      - ../templates:/var/www/templates

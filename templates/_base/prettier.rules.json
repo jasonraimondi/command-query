@@ -1,0 +1,12 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "parser": "typescript",
+  "encoding": "utf-8",
+  "extensions": [
+    ".ts"
+  ]
+}

@@ -5,5 +5,6 @@ return new TwigThemeConfig(
     'auth',
     'Authentication',
     'A theme for running tests.',
-    __DIR__
+    __DIR__,
+    TwigThemeConfig::getThemePathFromNamespace('_base')
 );
