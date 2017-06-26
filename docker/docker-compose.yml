@@ -9,7 +9,6 @@ services:
     volumes:
      - ../logs/mysql:/var/log
      - ../data/database:/var/lib/mysql
-     - ../backups/database:/backups
 
   nginx:
     build: ./nginx
@@ -22,7 +21,6 @@ services:
      - ../api-client-libraries:/var/www/api-client-libraries
      - ../domain:/var/www/domain
      - ../frontend:/var/www/frontend
-     - ../lumen-api:/var/www/lumen-api
      - ../lumen-auth:/var/www/lumen-auth
      - ../templates:/var/www/templates
 
@@ -34,6 +32,5 @@ services:
     volumes:
      - ../logs/php:/var/log
      - ../domain:/var/www/domain
-     - ../lumen-api:/var/www/lumen-api
      - ../lumen-auth:/var/www/lumen-auth
      - ../templates:/var/www/templates
