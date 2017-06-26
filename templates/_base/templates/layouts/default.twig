@@ -10,6 +10,8 @@
     {% endif %}
     <title>{% if pageTitle is empty %}Application Title{% else %}{{ pageTitle }} - Application Title{% endif %}</title>
 
+    <link rel="stylesheet" href="{{ assetManifestUrl('@_base', 'app.css') }}">
+
     {% block stylesheets %}{% endblock %}
 </head>
 <body>

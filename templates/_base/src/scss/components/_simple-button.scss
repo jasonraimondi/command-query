@@ -1,3 +1,23 @@
-.my-simple-button {
-  color: purple;
+.app__button {
+  @include button;
+  @include button-expand;
+
+  &[disabled] {
+    @include button-disabled;
+  }
+}
+
+.app__button--disabled {
+  @include button-disabled;
+}
+
+// Colors
+@each $name, $color in $button-palette {
+  .app__button--disabled-#{$name} {
+    @include button-disabled($color, auto);
+  }
+
+  .app__button--#{$name} {
+    @include button-style($color, auto, auto);
+  }
 }
