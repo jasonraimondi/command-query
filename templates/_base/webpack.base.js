@@ -19,10 +19,6 @@ module.exports = {
     vendor: projectRoot + '/src/vendor.ts',
     app: projectRoot + '/src/main.ts',
   },
-  output: {
-    path: projectRoot + '/assets',
-    filename: '[name].[hash].package.js'
-  },
   resolve: {
     extensions: ['.ts', '.js', '.css', '.scss', '.html', '.svg', '.jpg', '.jpeg', '.png', '.gif'],
   },
@@ -57,10 +53,6 @@ module.exports = {
     new ManifestPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin(pathsToClean, cleanOptions),
-    new ExtractTextPlugin({
-      filename: '[name].[hash].package.css',
-      allChunks: true,
-    }),
 
     // @see https://github.com/angular/angular/issues/14898#issuecomment-284039716
     //
