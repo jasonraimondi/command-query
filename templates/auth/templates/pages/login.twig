@@ -2,8 +2,12 @@
 
 {% block content %}
     <div>
-        <form action="/postImplicit?response_type={{ responseType }}&client_id={{ clientId }}&redirect_uri={{ redirectUri }}" method="post">
-
+        <h1>Login</h1>
+        <p>Hello my old friend.</p>
+        <form action="/postImplicit?response_type={{ responseType }}&client_id={{ clientId }}&redirect_uri={{ redirectUri }}"
+            class="app__forms"
+            method="post"
+        >
             <label>
                 Email
                 <input type="email" name="email" required>
@@ -14,7 +18,7 @@
                 <input type="password" name="password" required>
             </label>
 
-            <button class="app__button app__button--disabled" type="submit">Submit</button>
+            <button class="app__button" type="submit">Submit</button>
         </form>
     </div>
 
