@@ -24,7 +24,9 @@ class TwigTemplateGenerator
         $this->twigEnvironment = new Twig_Environment($this->twigLoader);
         $this->twigThemeConfigs = $twigThemeConfigs;
         $this->addTwigExtensions($twigExtensions);
-        $this->addTwigTwigThemeConfigs($twigThemeConfigs);
+        foreach ($twigThemeConfigs as $config) {
+            $this->addTwigThemeConfigs($config);
+        }
     }
 
     private function addTwigExtensions($twigExtensions)
@@ -32,15 +34,17 @@ class TwigTemplateGenerator
         $this->twigEnvironment->setExtensions($twigExtensions);
     }
 
-    /**
-     * @param TwigThemeConfig[] $twigThemeConfigs
-     */
-    private function addTwigTwigThemeConfigs(array $twigThemeConfigs)
+    private function addTwigThemeConfigs(TwigThemeConfig $twigThemeConfig)
     {
-        foreach ($twigThemeConfigs as $config) {
+        $this->twigLoader->setPaths(
+            $twigThemeConfig->getTwigTemplatePaths(),
+            $twigThemeConfig->getNamespace()
+        );
+
+        if ($twigThemeConfig->hasParentTheme()) {
             $this->twigLoader->setPaths(
-                $config->getTwigTemplatePaths(),
-                $config->getNamespace()
+                $twigThemeConfig->getParentTheme()->getTwigTemplatePaths(),
+                $twigThemeConfig->getParentTheme()->getNamespace()
             );
         }
     }

@@ -73,7 +73,7 @@ class TwigThemeConfig
         return $twigTemplatePaths;
     }
 
-    private function addTwigTemplatePath(string $twigTemplatePath)
+    private function addTwigTemplatePath(string $twigTemplatePath): void
     {
         if (!file_exists($twigTemplatePath)) {
             throw NotFoundException::twigTemplatePathNotFound();
@@ -82,11 +82,13 @@ class TwigThemeConfig
         $this->twigTemplatePaths[] = $twigTemplatePath;
     }
 
-    /**
-     * @return bool
-     */
-    private function hasParentTheme()
+    public function hasParentTheme(): bool
     {
         return $this->parentTheme !== null;
+    }
+
+    public function getParentTheme(): ?TwigThemeConfig
+    {
+        return $this->parentTheme;
     }
 }

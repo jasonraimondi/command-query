@@ -2,8 +2,8 @@
 use Jmondi\Gut\Infrastructure\Template\Twig\TwigThemeConfig;
 
 return new TwigThemeConfig(
-    'frontend',
-    'Frontend Project',
-    'The default admin theme for 2016',
+    '_base',
+    'Base Theme',
+    'The default base theme for 2017',
     __DIR__
 );
